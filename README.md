@@ -51,10 +51,15 @@ To build the package from scratch:
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
+Port 80 is forwarded to port 8000 on the host machine. See:
+
+    http://localhost:8000
+
+
 
 frontend_extras
 ---------------
-A version of `frontend` with ElasticSearch and Mongodb
+A version of `frontend` with ElasticSearch and Mongodb.
 
     /opt/vagrant/bin/vagrant init frontend_extras_lucid64 http://path-to-frontend_extras_lucid64.box
     /opt/vagrant/bin/vagrant up
@@ -71,6 +76,21 @@ To build the package from scratch, first build `frontend`, then:
     mv package.box frontend_extras_lucid64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
+
+Port 80 is forwarded to port 8000 on the host machine. See:
+
+    http://localhost:8000
+
+Port 9200 is forwarded, so the ElasticSearch server is available from the host
+machine. In addition, a number of plugins have been included. See:
+
+    http://localhost:9200/_plugin/head/
+    http://localhost:9200/_plugin/paramedic/index.html
+    http://localhost:9200/_plugin/bigdesk/
+
+Ports 27017 and 28017 are forwarded to the host machine for MongoDB. See:
+
+    http://localhost:28017
 
 
 Vagrant Commmands

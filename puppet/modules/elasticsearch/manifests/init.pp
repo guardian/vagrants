@@ -1,5 +1,11 @@
 class elasticsearch inherits java {
 
+  File {
+    owner => root,
+    group => root,
+    mode => 644
+  }
+
   file {
     '/var/cache/apt/archives': ensure => directory;
   }
@@ -20,9 +26,44 @@ class elasticsearch inherits java {
       require => Exec['download-elasticsearch-deb'];
   }
 
+  file {
+    '/etc/elasticsearch/elasticsearch.yml':
+      source => 'puppet:///modules/elasticsearch/etc/elasticsearch/elasticsearch.yml',
+      subscribe => Package['elasticsearch'];
+  }
+
+  exec {
+    'install-elasticsearch-plugin-head':
+      command => '/usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head',
+      refreshonly => true,
+      subscribe => Package['elasticsearch'];
+  }
+
+  exec {
+    'install-elasticsearch-plugin-paramedic':
+      command => '/usr/share/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic',
+      refreshonly => true,
+      subscribe => Package['elasticsearch'];
+  }
+
+  exec {
+    'install-elasticsearch-plugin-bigdesk':
+      command => '/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk',
+      refreshonly => true,
+      subscribe => Package['elasticsearch'];
+  }
+
   service {
     elasticsearch:
       ensure => running,
-      require => Package['elasticsearch'];
+      require => [
+        Package['elasticsearch'],
+        Exec[
+          'install-elasticsearch-plugin-head',
+          'install-elasticsearch-plugin-paramedic',
+          'install-elasticsearch-plugin-bigdesk'
+        ]
+      ],
+      subscribe => File['/etc/elasticsearch/elasticsearch.yml'];
   }
 }
