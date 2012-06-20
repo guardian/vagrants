@@ -55,16 +55,16 @@ The puppet provisioning during the `vagrant up` step may take some time.
 Vagrant Commmands
 -----------------
 
-* /opt/vagrant/bin/vagrant suspend: Disable the virtual instance. The allocated
+* `/opt/vagrant/bin/vagrant suspend`: Disable the virtual instance. The allocated
   disc space for the instance is retained but the instance will not be
   available. The running state at suspend time is saved for resumption.
-* /opt/vagrant/bin/vagrant resume: Wake up a previously suspended virtual
+* `/opt/vagrant/bin/vagrant resume`: Wake up a previously suspended virtual
   instance.
-* /opt/vagrant/bin/vagrant halt: Turn off the virtual instance. Calling vagrant
+* `/opt/vagrant/bin/vagrant halt`: Turn off the virtual instance. Calling vagrant
   up after this is the equivalent of a reboot.
-* /opt/vagrant/bin/vagrant destroy: Hose your virtual instance, reclaiming the
+* `/opt/vagrant/bin/vagrant destroy`: Hose your virtual instance, reclaiming the
   allocated disc space.
-* /opt/vagrant/bin/vagrant provision: Rerun puppet or chef provisioning on the
+* `/opt/vagrant/bin/vagrant provision`: Rerun puppet or chef provisioning on the
   virtual instance.
 
 
@@ -74,7 +74,7 @@ Vagrant Troubleshooting
 To see more verbose output on any vagrant command, add a VAGRANT_LOG environment
 variable setting, e.g.:
 
-   VAGRANT_LOG=INFO /opt/vagrant/bin/vagrant up
+    VAGRANT_LOG=INFO /opt/vagrant/bin/vagrant up
 
 Further help troubleshooting can be obtained by editing your `Vagrantfile` and
 enabling the `config.vm.boot_mode = :gui` setting. This will pop up a VirtualBox
@@ -83,7 +83,7 @@ GUI window on boot.
 There have been some issues getting 64bit instances to start. The error is
 apparent in GUI boot:
 
-   VT-x/AMD-V hardware acceleration has been enabled, but is not
+    VT-x/AMD-V hardware acceleration has been enabled, but is not
 operational. Your 64-bit guest will fail to detect a 64-bit CPU and
 will not be able to boot.
 
