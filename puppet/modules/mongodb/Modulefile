@@ -1,0 +1,8 @@
+name    'mongodb'
+version '0.1'
+source 'git://github.com/guardian/vagrant/puppet/modules/mongodb'
+author 'guardian'
+license 'Apache'
+summary 'Manage an MongoDB installation'
+description 'Manage an MongoDB installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/mongodb'

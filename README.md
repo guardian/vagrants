@@ -46,8 +46,29 @@ To build the package from scratch:
 
     cd frontend_lucid64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --vagrantfile Vagrantfile --include manifests
-    mv package.box frontend_article_lucid64.box
+    /opt/vagrant/bin/vagrant package
+    mv package.box frontend_lucid64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+
+frontend_extras
+---------------
+A version of `frontend` with ElasticSearch and Mongodb
+
+    /opt/vagrant/bin/vagrant init frontend_extras_lucid64 http://path-to-frontend_extras_lucid64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `frontend`, then:
+
+    cd frontend_extras_lucid64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package
+    mv package.box frontend_extras_lucid64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -55,13 +76,13 @@ The puppet provisioning during the `vagrant up` step may take some time.
 Vagrant Commmands
 -----------------
 
-* `/opt/vagrant/bin/vagrant suspend`: Disable the virtual instance. The allocated
-  disc space for the instance is retained but the instance will not be
+* `/opt/vagrant/bin/vagrant suspend`: Disable the virtual instance. The
+  allocated disc space for the instance is retained but the instance will not be
   available. The running state at suspend time is saved for resumption.
 * `/opt/vagrant/bin/vagrant resume`: Wake up a previously suspended virtual
   instance.
-* `/opt/vagrant/bin/vagrant halt`: Turn off the virtual instance. Calling vagrant
-  up after this is the equivalent of a reboot.
+* `/opt/vagrant/bin/vagrant halt`: Turn off the virtual instance. Calling
+  `vagrant up` after this is the equivalent of a reboot.
 * `/opt/vagrant/bin/vagrant destroy`: Hose your virtual instance, reclaiming the
   allocated disc space.
 * `/opt/vagrant/bin/vagrant provision`: Rerun puppet or chef provisioning on the
@@ -99,7 +120,5 @@ but briefly:
 
 
 
-
 [frontend]: https://github.com/guardian/frontend
 [vagrant]: http://vagrantup.com
-

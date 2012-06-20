@@ -1,0 +1,14 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "frontend_lucid64"
+  config.vm.box_url = "../frontend_lucid64/frontend_lucid64.box"
+
+  # config.vm.boot_mode = :gui
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+    puppet.module_path  = "../puppet/modules"
+  end
+
+end
