@@ -1,0 +1,8 @@
+name    'guardian'
+version '0.1'
+source 'git://github.com/guardian/vagrants/puppet/modules/nginx'
+author 'guardian'
+license 'Apache'
+summary 'Manage an NGINX installation'
+description 'Manage an NGINX installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/nginx'

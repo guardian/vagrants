@@ -1,0 +1,8 @@
+name    'java'
+version '0.1'
+source 'git://github.com/guardian/vagrants/puppet/modules/java'
+author 'guardian'
+license 'Apache'
+summary 'Manage an OpenJDK installation'
+description 'Manage an OpenJDK installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/java'
