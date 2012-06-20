@@ -91,11 +91,11 @@ Some BIOS setting changes can help. The changes are described at
 `http://dba-star.blogspot.com/2011/11/how-to-enable-vtx-and-vtd-on-hp-compaq.html`
 but briefly:
 
-1 Restart your developer box.
-2 Press F10 for BIOS settings at the boot splash.
-3 Edit Security -> System Security (I wasn't expecting it here either!)
-4 Enable VT-x and VT-d settings.
-5 Save and exit.
+1. Restart your developer box.
+2. Press F10 for BIOS settings at the boot splash.
+3. Edit Security -> System Security (I wasn't expecting it here either!)
+4. Enable VT-x and VT-d settings.
+5. Save and exit.
 
 
 
