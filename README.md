@@ -52,6 +52,11 @@ The puppet provisioning during the `vagrant up` step may take some time to
 download the Java packages.
 
 
+`base_precise64`
+--------------
+As above with Ubuntu 12.04
+
+
 `play_lucid64`
 --------------
 The basic Ubuntu box with NGINX and a server configuration suitable for a Play

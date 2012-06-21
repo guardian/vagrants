@@ -1,5 +1,13 @@
 class guardian {
 
+  if $operatingsystem != 'ubuntu' {
+    fail("Unsupported operating system: $operatingsystem")
+  }
+
+  if !($lsbdistcodename in ["lucid", "precise"]) {
+    fail("Unsupported distribution: $lsbdistcodename")
+  }
+
   group {
     'puppet': ensure => present;
   }
@@ -18,7 +26,7 @@ class guardian {
 
     # Use UK mirrors for Ubuntu repositories
     '/etc/apt/sources.list':
-      source => 'puppet:///modules/guardian/etc/apt/sources.list';
+      source => "puppet:///modules/guardian/etc/apt/sources.list.$lsbdistcodename";
 
     # Need a long timeout for Postini download virus checks
     '/etc/apt/apt.conf.d/30timeout':
