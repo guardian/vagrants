@@ -4,11 +4,8 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
 
   # config.vm.boot_mode = :gui
-  config.vm.share_folder "puppet-files", "/etc/puppet/files", "files"
 
-  config.vm.forward_port 80, 8000
-
-  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/fileserver.conf"] do |puppet|
+  config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "."
     puppet.manifest_file = "site.pp"
     puppet.module_path  = "../puppet/modules"

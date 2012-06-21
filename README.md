@@ -31,11 +31,11 @@ base directory as a sources directory.
 Your project should now be setup for editing.
 
 
-frontend
---------
-Vagrant box supporting Guardian [frontend][frontend].
+`base_lucid64`
+--------------
+Basic Ubuntu 10.04 box with `/etc/gu`, apt configuration and Java.
 
-    /opt/vagrant/bin/vagrant init frontend_lucid64 http://path-to-frontend_lucid64.box
+    /opt/vagrant/bin/vagrant init base_lucid64 http://path-to-frontend_base64.box
     /opt/vagrant/bin/vagrant up
 
 And ssh onto it:
@@ -44,51 +44,88 @@ And ssh onto it:
 
 To build the package from scratch:
 
-    cd frontend_lucid64
+    cd base_lucid64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package
-    mv package.box frontend_lucid64.box
+    /opt/vagrant/bin/vagrant package --output base_lucid64.box
 
-The puppet provisioning during the `vagrant up` step may take some time.
-
-Port 80 is forwarded to port 8000 on the host machine. See:
-
-    http://localhost:8000
+The puppet provisioning during the `vagrant up` step may take some time to
+download the Java packages.
 
 
+`play_lucid64`
+--------------
+The basic Ubuntu box with NGINX and a server configuration suitable for a Play
+Framework application. This box supports Guardian [frontend][frontend].
 
-frontend_extras
----------------
-A version of `frontend` with ElasticSearch and Mongodb.
-
-    /opt/vagrant/bin/vagrant init frontend_extras_lucid64 http://path-to-frontend_extras_lucid64.box
+    /opt/vagrant/bin/vagrant init play_lucid64 http://path-to-play_lucid64.box
     /opt/vagrant/bin/vagrant up
 
 And ssh onto it:
 
     /opt/vagrant/bin/vagrant ssh
 
-To build the package from scratch, first build `frontend`, then:
+To build the package from scratch, first build `base_lucid64`, then::
 
-    cd frontend_extras_lucid64
+    cd play_lucid64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package
-    mv package.box frontend_extras_lucid64.box
+    /opt/vagrant/bin/vagrant package --output play_lucid64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
-Port 80 is forwarded to port 8000 on the host machine. See:
+`VagrantFiles` using this box should forward port 80 to the host machine. Port
+9000 is also useful for direct access to the Play Framework application.
 
-    http://localhost:8000
+    config.vm.forward_port 80, 8000
+    config.vm.forward_port 9000, 9000
 
-Port 9200 is forwarded, so the ElasticSearch server is available from the host
-machine. In addition, a number of plugins have been included. See:
+This forwards port 80 to port 8000 on the host machine to avoid clashes with
+existing webservers on the host box.
+
+
+`play_extras_lucid64`
+---------------------
+A version of `play_lucid64` with ElasticSearch and Mongodb.
+
+    /opt/vagrant/bin/vagrant init play_extras_lucid64 http://path-to-play_extras_lucid64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `play_lucid64`, then:
+
+    cd play_extras_lucid64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output play_extras_lucid64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 80 to the host machine. Port
+9000 is also useful for direct access to the Play Framework application.
+
+    config.vm.forward_port 80, 8000
+    config.vm.forward_port 9000, 9000
+
+This forwards port 80 to port 8000 on the host machine to avoid clashes with
+existing webservers on the host box.
+
+In addition, forward port 9200 for ElasticSearch.
+
+    config.vm.forward_port 9200, 9200
+
+A number of ElasticSearch plugins are included in this box. See:
 
     http://localhost:9200/_plugin/head/
     http://localhost:9200/_plugin/paramedic/index.html
     http://localhost:9200/_plugin/bigdesk/
 
-Ports 27017 and 28017 are forwarded to the host machine for MongoDB. See:
+Forward ports 27017 and 28017 to the host machine for MongoDB.
+
+    config.vm.forward_port 27017, 27017
+    config.vm.forward_port 28017, 28017
+
+The MongoDB web interface is available:
 
     http://localhost:28017
 
