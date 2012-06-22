@@ -7,13 +7,13 @@ class java {
   }
 
   file {
-    '/etc/profile.d/java.sh':
-      source => 'puppet:///modules/java/etc/profile.d/java.sh';
+    "/etc/profile.d/java.sh":
+      source => "puppet:///modules/java/etc/profile.d/java.sh";
   }
 
   # OpenJDK because https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-December/001528.html
   package {
-    openjdk-6-source: ensure => present;
+    openjdk-6-jdk: ensure => present;
   }
 
 }
