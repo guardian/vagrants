@@ -7,63 +7,63 @@ class elasticsearch inherits java {
   }
 
   file {
-    '/var/cache/apt/archives': ensure => directory;
+    "/var/cache/apt/archives": ensure => directory;
   }
 
   exec {
-    'download-elasticsearch-deb':
-      command => '/usr/bin/wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.4.deb',
-      cwd => '/var/cache/apt/archives',
-      creates => '/var/cache/apt/archives/elasticsearch-0.19.4.deb',
-      require => File['/var/cache/apt/archives'];
+    "download-elasticsearch-deb":
+      command => "/usr/bin/wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.4.deb",
+      cwd => "/var/cache/apt/archives",
+      creates => "/var/cache/apt/archives/elasticsearch-0.19.4.deb",
+      require => File["/var/cache/apt/archives"];
   }
 
   package {
     elasticsearch:
       provider => dpkg,
       ensure => installed,
-      source => '/var/cache/apt/archives/elasticsearch-0.19.4.deb',
-      require => Exec['download-elasticsearch-deb'];
+      source => "/var/cache/apt/archives/elasticsearch-0.19.4.deb",
+      require => Exec["download-elasticsearch-deb"];
   }
 
   file {
-    '/etc/elasticsearch/elasticsearch.yml':
-      source => 'puppet:///modules/elasticsearch/etc/elasticsearch/elasticsearch.yml',
-      subscribe => Package['elasticsearch'];
+    "/etc/elasticsearch/elasticsearch.yml":
+      source => "puppet:///modules/elasticsearch/etc/elasticsearch/elasticsearch.yml",
+      subscribe => Package["elasticsearch"];
   }
 
   exec {
-    'install-elasticsearch-plugin-head':
-      command => '/usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head',
+    "install-elasticsearch-plugin-head":
+      command => "/usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head",
       refreshonly => true,
-      subscribe => Package['elasticsearch'];
+      subscribe => Package["elasticsearch"];
   }
 
   exec {
-    'install-elasticsearch-plugin-paramedic':
-      command => '/usr/share/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic',
+    "install-elasticsearch-plugin-paramedic":
+      command => "/usr/share/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic",
       refreshonly => true,
-      subscribe => Package['elasticsearch'];
+      subscribe => Package["elasticsearch"];
   }
 
   exec {
-    'install-elasticsearch-plugin-bigdesk':
-      command => '/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk',
+    "install-elasticsearch-plugin-bigdesk":
+      command => "/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk",
       refreshonly => true,
-      subscribe => Package['elasticsearch'];
+      subscribe => Package["elasticsearch"];
   }
 
   service {
     elasticsearch:
       ensure => running,
       require => [
-        Package['elasticsearch'],
+        Package["elasticsearch"],
         Exec[
-          'install-elasticsearch-plugin-head',
-          'install-elasticsearch-plugin-paramedic',
-          'install-elasticsearch-plugin-bigdesk'
+          "install-elasticsearch-plugin-head",
+          "install-elasticsearch-plugin-paramedic",
+          "install-elasticsearch-plugin-bigdesk"
         ]
       ],
-      subscribe => File['/etc/elasticsearch/elasticsearch.yml'];
+      subscribe => File["/etc/elasticsearch/elasticsearch.yml"];
   }
 }
