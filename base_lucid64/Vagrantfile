@@ -5,7 +5,7 @@ Vagrant::Config.run do |config|
 
   # config.vm.boot_mode = :gui
 
-  config.vm.provision :puppet do |puppet|
+  config.vm.provision :puppet, :options => ["--debug"] do |puppet|
     puppet.manifests_path = "."
     puppet.manifest_file = "site.pp"
     puppet.module_path  = "../puppet/modules"
