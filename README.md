@@ -31,11 +31,11 @@ base directory as a sources directory.
 Your project should now be setup for editing.
 
 
-`base_lucid64`
+`base_precise64`
 --------------
-Basic Ubuntu 10.04 box with `/etc/gu`, apt configuration and Java.
+Basic Ubuntu 12.04 box with `/etc/gu`, apt configuration and Java.
 
-    /opt/vagrant/bin/vagrant init base_lucid64 http://path-to-frontend_base64.box
+    /opt/vagrant/bin/vagrant init base_precise64 http://path-to-frontend_base64.box
     /opt/vagrant/bin/vagrant up
 
 And ssh onto it:
@@ -44,36 +44,31 @@ And ssh onto it:
 
 To build the package from scratch:
 
-    cd base_lucid64
+    cd base_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output base_lucid64.box
+    /opt/vagrant/bin/vagrant package --output base_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time to
 download the Java packages.
 
 
-`base_precise64`
---------------
-As above with Ubuntu 12.04
-
-
-`play_lucid64`
+`play_precise64`
 --------------
 The basic Ubuntu box with NGINX and a server configuration suitable for a Play
 Framework application. This box supports Guardian [frontend][frontend].
 
-    /opt/vagrant/bin/vagrant init play_lucid64 http://path-to-play_lucid64.box
+    /opt/vagrant/bin/vagrant init play_precise64 http://path-to-play_precise64.box
     /opt/vagrant/bin/vagrant up
 
 And ssh onto it:
 
     /opt/vagrant/bin/vagrant ssh
 
-To build the package from scratch, first build `base_lucid64`, then::
+To build the package from scratch, first build `base_precise64`, then::
 
-    cd play_lucid64
+    cd play_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output play_lucid64.box
+    /opt/vagrant/bin/vagrant package --output play_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -87,22 +82,22 @@ This forwards port 80 to port 8000 on the host machine to avoid clashes with
 existing webservers on the host box.
 
 
-`play_extras_lucid64`
+`play_extras_precise64`
 ---------------------
-A version of `play_lucid64` with ElasticSearch and Mongodb.
+A version of `play_precise64` with ElasticSearch and Mongodb.
 
-    /opt/vagrant/bin/vagrant init play_extras_lucid64 http://path-to-play_extras_lucid64.box
+    /opt/vagrant/bin/vagrant init play_extras_precise64 http://path-to-play_extras_precise64.box
     /opt/vagrant/bin/vagrant up
 
 And ssh onto it:
 
     /opt/vagrant/bin/vagrant ssh
 
-To build the package from scratch, first build `play_lucid64`, then:
+To build the package from scratch, first build `play_precise64`, then:
 
-    cd play_extras_lucid64
+    cd play_extras_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output play_extras_lucid64.box
+    /opt/vagrant/bin/vagrant package --output play_extras_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -167,8 +162,8 @@ There have been some issues getting 64bit instances to start. The error is
 apparent in GUI boot:
 
     VT-x/AMD-V hardware acceleration has been enabled, but is not
-operational. Your 64-bit guest will fail to detect a 64-bit CPU and
-will not be able to boot.
+    operational. Your 64-bit guest will fail to detect a 64-bit CPU and
+    will not be able to boot.
 
 Some BIOS setting changes can help. The changes are described at
 `http://dba-star.blogspot.com/2011/11/how-to-enable-vtx-and-vtd-on-hp-compaq.html`

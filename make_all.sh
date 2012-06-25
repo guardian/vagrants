@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOXES="base_lucid64  play_lucid64  play_extras_lucid64  base_precise64  play_extras_precise64  play_precise64"
+BOXES="base_precise64 play_precise64 play_extras_precise64"
 VAGRANT=/opt/vagrant/bin/vagrant
 
 for BOX in ${BOXES}
@@ -16,16 +16,6 @@ do
     echo "Error in box creation. Exiting."
     exit 1
   fi
-
-  popd > /dev/null
-done
-
-for BOX in ${BOXES}
-do
-  echo "Uploading box: ${BOX}"
-  pushd ${BOX} > /dev/null
-
-  scp ${BOX}.box root@devscreen:/var/www/html/vagrants
 
   popd > /dev/null
 done
