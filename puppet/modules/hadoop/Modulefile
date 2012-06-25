@@ -1,0 +1,10 @@
+name    'hadoop'
+version '0.1'
+source 'git://github.com/guardian/vagrants/puppet/modules/hadoop'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Hadoop installation'
+description 'Manage a hadoop installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/hadoop'
+
+dependency 'guardian/java', '>= 0.1'

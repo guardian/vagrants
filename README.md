@@ -130,6 +130,56 @@ The MongoDB web interface is available:
     http://localhost:28017
 
 
+`hadoop_precise64`
+---------------------
+The basic Ubuntu box with a Hadoop setup.
+
+    /opt/vagrant/bin/vagrant init hadoop_precise64 http://path-to-hadoop_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd hadoop_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output hadoop_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward ports 50030, 50060, 50070 and
+50075 to the host machine for the Hadoop web monitoring interfaces.
+
+    config.vm.forward_port 50030, 50030
+    config.vm.forward_port 50060, 50060
+    config.vm.forward_port 50070, 50070
+    config.vm.forward_port 50075, 50075
+
+The HDFS web interface is available:
+
+    http://localhost:50070/
+
+The Job Tracker web interface is available:
+
+    http://localhost:50030/
+
+The Task Tracker web interface is available:
+
+    http://localhost:50060/
+
+The following is a simple Hadoop execution test:
+
+    $ hadoop fs -put /etc/hadoop input
+    $ hadoop jar /usr/share/hadoop/hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
+    $ hadoop fs -cat output/*
+
+*Note:* The service status and stop scripts are broken because they attempt to
+read the wrong PID files. This can cause significant trouble when reprovisioning
+this box.
+
+
 Vagrant Commmands
 -----------------
 
