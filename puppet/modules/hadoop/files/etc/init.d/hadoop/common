@@ -3,6 +3,10 @@
 service_command() {
   case "$1" in
     start)
+      # Stop first if already running
+      pkill -f $PID "$3"
+      sleep 1
+
       service $2 start
     ;;
 
