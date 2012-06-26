@@ -9,44 +9,41 @@ class hdfs {
   file {
     # Fix up file permissions on base filesystem after namenode format
     "/hadoop":
-      owner => root,
-      group => root,
-      mode => 777,
+      owner => hdfs,
+      group => hdfs,
       recurse => true,
       subscribe => Exec["namenode-format"];
   }
 
   Service {
-    require => File["/hadoop"],
     subscribe => Class["configuration"]
   }
 
   service {
     "hadoop-namenode":
-      provider => "base",
-      start => "/usr/sbin/service hadoop-namenode start",
-      status => "/bin/ps aux | /bin/grep 'org.apache.hadoop.hdfs.server.namenode.NameNode' | /bin/grep -v grep",
-      stop => "/bin/kill `/bin/ps aux | /bin/grep 'org.apache.hadoop.hdfs.server.namenode.NameNode' | /bin/grep -v grep | /usr/bin/awk '{ print \$2 }'` && sleep 1",
+      provider => "init",
+      hasstatus => true,
+      start => "/etc/init.d/hadoop/namenode start",
+      status => "/etc/init.d/hadoop/namenode status",
+      stop => "/etc/init.d/hadoop/namenode stop",
       ensure => running;
 
     "hadoop-secondarynamenode":
-      provider => "base",
-      start => "/usr/sbin/service hadoop-secondarynamenode start",
-      status => "/bin/ps aux | /bin/grep 'org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode' | /bin/grep -v grep",
-      stop => "/bin/kill `/bin/ps aux | /bin/grep 'org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode' | /bin/grep -v grep | /usr/bin/awk '{ print \$2 }'` && sleep 1",
+      provider => "init",
+      hasstatus => true,
+      start => "/etc/init.d/hadoop/secondarynamenode start",
+      status => "/etc/init.d/hadoop/secondarynamenode status",
+      stop => "/etc/init.d/hadoop/secondarynamenode stop",
       ensure => running;
 
     "hadoop-datanode":
       provider => "base",
-      start => "/usr/sbin/service hadoop-datanode start",
-      status => "/bin/ps aux | /bin/grep 'org.apache.hadoop.hdfs.server.datanode.DataNode' | /bin/grep -v grep",
-      stop => "/bin/kill `/bin/ps aux | /bin/grep 'org.apache.hadoop.hdfs.server.datanode.DataNode' | /bin/grep -v grep | /usr/bin/awk '{ print \$2 }'` && sleep 1",
+      hasstatus => true,
+      start => "/etc/init.d/hadoop/datanode start",
+      status => "/etc/init.d/hadoop/datanode status",
+      stop => "/etc/init.d/hadoop/datanode stop",
       ensure => running;
   }
-
-  Service["hadoop-namenode"] ->
-    Service["hadoop-secondarynamenode"] ->
-    Service["hadoop-datanode"]
 
   file {
     # Fix up log directory permissions after services start
@@ -62,5 +59,11 @@ class hdfs {
         "hadoop-datanode"
       ];
   }
+
+  File["/hadoop"] ->
+    Service["hadoop-namenode"] ->
+    Service["hadoop-secondarynamenode"] ->
+    Service["hadoop-datanode"] ->
+    File["/var/log/hadoop hdfs_permissions"]
 
 }

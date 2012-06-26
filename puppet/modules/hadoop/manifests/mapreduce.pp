@@ -8,29 +8,26 @@ class mapreduce {
   }
 
   Service {
-    require => Package["hadoop"],
-    subscribe => Class["hdfs"]
+    subscribe => Class["configuration"]
   }
 
   service {
     "hadoop-jobtracker":
       provider => "base",
-      start => "/usr/sbin/service hadoop-jobtracker start",
-      status => "/bin/ps aux | /bin/grep 'org.apache.hadoop.mapred.JobTracker' | /bin/grep -v grep",
-      stop => "/bin/kill `/bin/ps aux | /bin/grep 'org.apache.hadoop.mapred.JobTracker' | /bin/grep -v grep | /usr/bin/awk '{ print \$2 }'` && sleep 1",
+      hasstatus => true,
+      start => "/etc/init.d/hadoop/jobtracker start",
+      status => "/etc/init.d/hadoop/jobtracker status",
+      stop => "/etc/init.d/hadoop/jobtracker stop",
       ensure => running;
 
     "hadoop-tasktracker":
       provider => "base",
-      start => "/usr/sbin/service hadoop-tasktracker start",
-      status => "/bin/ps aux | /bin/grep 'org.apache.hadoop.mapred.TaskTracker' | /bin/grep -v grep",
-      stop => "/bin/kill `/bin/ps aux | /bin/grep 'org.apache.hadoop.mapred.TaskTracker' | /bin/grep -v grep | /usr/bin/awk '{ print \$2 }'` && sleep 1",
+      hasstatus => true,
+      start => "/etc/init.d/hadoop/tasktracker start",
+      status => "/etc/init.d/hadoop/tasktracker status",
+      stop => "/etc/init.d/hadoop/tasktracker stop",
       ensure => running;
   }
-
-  Exec["hdfs-root-permissions"] ->
-    Service["hadoop-jobtracker"] ->
-    Service["hadoop-tasktracker"]
 
   file {
     # Fix up log directory permissions after services start
@@ -44,4 +41,9 @@ class mapreduce {
         "hadoop-tasktracker"
       ];
   }
+
+  Exec["hdfs-root-permissions"] ->
+    Service["hadoop-jobtracker"] ->
+    Service["hadoop-tasktracker"] ->
+    File["/var/log/hadoop mapreduce_permissions"]
 }

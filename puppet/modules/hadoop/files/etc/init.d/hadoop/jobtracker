@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BASEDIR=$(cd `dirname "$0"` && pwd)
+. "${BASEDIR}/common"
+
+service_command $1 "hadoop-jobtracker" "org.apache.hadoop.mapred.JobTracker"

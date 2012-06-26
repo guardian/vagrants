@@ -1,0 +1,22 @@
+#!/bin/bash
+
+service_command() {
+  case "$1" in
+    start)
+      service $2 start
+    ;;
+
+    stop)
+      pkill -f $PID "$3"
+      sleep 1
+    ;;
+
+    status)
+      pgrep -f "$3" > /dev/null
+      exit $?
+    ;;
+
+    *)
+    ;;
+  esac
+}
