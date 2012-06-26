@@ -1,0 +1,39 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "elasticsearch_precise64"
+  config.vm.box_url = "../../elasticsearch_precise64/elasticsearch_precise64.box"
+
+  # config.vm.boot_mode = :gui
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "files"
+
+  config.vm.provision :puppet, :options => [
+      "--fileserverconfig=/vagrant/fileserver.conf",
+      "--templatedir=/vagrant/templates",
+      "--debug"
+    ] do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+  end
+
+  config.vm.define :elasticsearch1 do |elasticsearch1|
+    elasticsearch1.vm.host_name = "elasticsearch1"
+    elasticsearch1.vm.network :hostonly, "10.0.0.2"
+
+    elasticsearch1.vm.forward_port 9200, 9200
+  end
+
+  config.vm.define :elasticsearch2 do |elasticsearch2|
+    elasticsearch2.vm.host_name = "elasticsearch2"
+    elasticsearch2.vm.network :hostonly, "10.0.0.3"
+
+    elasticsearch2.vm.forward_port 9200, 9201
+  end
+
+  config.vm.define :elasticsearch3 do |elasticsearch3|
+    elasticsearch3.vm.host_name = "elasticsearch3"
+    elasticsearch3.vm.network :hostonly, "10.0.0.4"
+
+    elasticsearch3.vm.forward_port 9200, 9202
+  end
+
+end

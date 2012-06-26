@@ -1,0 +1,33 @@
+Vagrant::Config.run do |config|
+
+  # config.vm.boot_mode = :gui
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "files"
+
+  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/fileserver.conf", "--debug"] do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+  end
+
+  config.vm.define :appserver do |appserver|
+    appserver.vm.host_name = "appserver"
+    appserver.vm.network :hostonly, "10.0.0.2"
+
+    appserver.vm.box = "play_precise64"
+    appserver.vm.box_url = "../../play_precise64/play_precise64.box"
+
+    appserver.vm.forward_port 80, 8000
+    appserver.vm.forward_port 9000, 9000
+  end
+
+  config.vm.define :mongodb do |mongodb|
+    mongodb.vm.host_name = "mongodb"
+    mongodb.vm.network :hostonly, "10.0.0.3"
+
+    mongodb.vm.box = "mongodb_precise64"
+    mongodb.vm.box_url = "../../mongodb_precise64/mongodb_precise64.box"
+
+    mongodb.vm.forward_port 27017, 27017
+    mongodb.vm.forward_port 28017, 28017
+  end
+
+end

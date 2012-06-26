@@ -288,6 +288,19 @@ this box should include puppet provisioning like follows:
 See the example in `examples/hadoop_standalone`.
 
 
+Examples
+--------
+Example multi-VM stacks are included under `examples`. At present, these
+include:
+
+* `elasticsearch_stack`: An application server with a separate ElasticSearch
+  backend VM.
+* `elasticsearch_cluster`: An three node cluster of ElasticSearch VMs.
+* `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
+   the Hadoop services.
+* `mongodb_stack`: An application server with a separate MongoDB backend VM.
+
+
 Vagrant Commmands
 -----------------
 
