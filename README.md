@@ -52,6 +52,65 @@ The puppet provisioning during the `vagrant up` step may take some time to
 download the Java packages.
 
 
+`mongodb_precise64`
+---------------------
+The basic Ubuntu box with a MongoDB installation.
+
+    /opt/vagrant/bin/vagrant init mongodb_precise64 http://path-to-mongodb_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd mongodb_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output mongodb_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward ports 27017 and 28017 to the host
+machine for MongoDB.
+
+    config.vm.forward_port 27017, 27017
+    config.vm.forward_port 28017, 28017
+
+The MongoDB web interface is available:
+
+    http://localhost:28017
+
+
+`elasticsearch_precise64`
+---------------------
+The basic Ubuntu box with an ElasticSearch installation.
+
+    /opt/vagrant/bin/vagrant init elasticsearch_precise64 http://path-to-elasticsearch_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd elasticsearch_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output elasticsearch_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 9200 for ElasticSearch.
+
+    config.vm.forward_port 9200, 9200
+
+A number of ElasticSearch plugins are included in this box. See:
+
+    http://localhost:9200/_plugin/head/
+    http://localhost:9200/_plugin/paramedic/index.html
+    http://localhost:9200/_plugin/bigdesk/
+
 `play_precise64`
 --------------
 The basic Ubuntu box with NGINX and a server configuration suitable for a Play
