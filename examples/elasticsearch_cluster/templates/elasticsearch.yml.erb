@@ -1,3 +1,11 @@
+network.publish_host: <%= @ipaddress_eth1 %>
+
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["elasticsearch1", "elasticsearch2", "elasticsearch3"]
+
+
+
+
 ##################### ElasticSearch Configuration Example #####################
 
 # This file contains an overview of various configuration settings,
@@ -203,7 +211,7 @@
 # Set the address other nodes will use to communicate with this node. If not
 # set, it is automatically derived. It must point to an actual IP address.
 #
-network.publish_host: <%= @ipaddress_eth1 %>
+# network.publish_host: 192.168.0.1
 
 # Set both 'bind_host' and 'publish_host':
 #
@@ -316,13 +324,12 @@ network.publish_host: <%= @ipaddress_eth1 %>
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-discovery.zen.ping.multicast.enabled: false
+# discovery.zen.ping.multicast.enabled: false
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
-discovery.zen.ping.unicast.hosts: ["elasticsearch1", "elasticsearch2", "elasticsearch3"]
-#discovery.zen.ping.unicast.hosts: ["10.0.0.2", "10.0.0.3", "10.0.0.4"]
+# discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #
