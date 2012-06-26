@@ -1,4 +1,5 @@
 class base-installation {
+
   File {
     owner => root,
     group => root,

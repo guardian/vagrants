@@ -15,8 +15,8 @@ class elasticsearch-download {
       command => "/usr/bin/wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.4.deb",
       cwd => "/var/cache/apt/archives",
       creates => "/var/cache/apt/archives/elasticsearch-0.19.4.deb",
-      require => File["/var/cache/apt/archives"],
       timeout => 0;
   }
 
+  File["/var/cache/apt/archives"] -> Exec["download-elasticsearch-deb"]
 }

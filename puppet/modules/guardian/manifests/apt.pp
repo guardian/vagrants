@@ -18,7 +18,7 @@ class apt {
     "/etc/apt/sources.list":
       source => "puppet:///modules/guardian/etc/apt/sources.list";
 
-    # Need a long timeout for Postini download virus checks
+    # Need a long timeout for download virus checks
     "/etc/apt/apt.conf.d/30timeout":
       source => "puppet:///modules/guardian/etc/apt/apt.conf.d/30timeout";
 
@@ -29,11 +29,10 @@ class apt {
   exec {
     apt-update-sources:
       command => "/usr/bin/apt-get update",
-      require => File[
-        "/etc/apt/apt.conf.d/30timeout",
-        "/etc/apt/apt.conf.d/31retries"
-      ],
       subscribe => File["/etc/apt/sources.list"],
       refreshonly => true;
   }
+
+  File["/etc/apt/apt.conf.d/30timeout", "/etc/apt/apt.conf.d/31retries"] ->
+    Exec["apt-update-sources"]
 }
