@@ -14,9 +14,19 @@ node default {
       content => template("elasticsearch.yml.erb");
   }
 
-  service {
-    elasticsearch:
-      ensure => running,
+  # The elasticsearch service doesn't listen to reason.
+  exec {
+    restart-elasticsearch:
+      command => "/usr/sbin/service elasticsearch restart",
+      refreshonly => true,
       subscribe => File["/etc/elasticsearch/elasticsearch.yml"];
   }
+
+  service {
+    elasticsearch: ensure => running;
+  }
+
+  File["/etc/elasticsearch/elasticsearch.yml"] ->
+    Exec["restart-elasticsearch"] ->
+    Service["elasticsearch"]
 }
