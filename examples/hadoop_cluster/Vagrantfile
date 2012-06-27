@@ -1,0 +1,34 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "hadoop_precise64"
+  config.vm.box_url = "../../hadoop_precise64/hadoop_precise64.box"
+
+  # config.vm.boot_mode = :gui
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "files"
+
+  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/fileserver.conf", "--debug"] do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+  end
+
+  config.vm.define :master do |master|
+    master.vm.host_name = "master"
+    master.vm.network :hostonly, "10.0.0.2"
+
+    master.vm.forward_port 50030, 50030
+    master.vm.forward_port 50060, 50060
+    master.vm.forward_port 50070, 50070
+    master.vm.forward_port 50075, 50075
+  end
+
+  config.vm.define :slave1 do |slave1|
+    slave1.vm.host_name = "slave1"
+    slave1.vm.network :hostonly, "10.0.0.3"
+  end
+
+  config.vm.define :slave2 do |slave2|
+    slave2.vm.host_name = "slave2"
+    slave2.vm.network :hostonly, "10.0.0.4"
+  end
+
+end
