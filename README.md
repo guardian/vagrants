@@ -191,7 +191,9 @@ The MongoDB web interface is available:
 
 `hadoop_precise64`
 ---------------------
-The basic Ubuntu box with a Hadoop setup.
+The basic Ubuntu box with a Hadoop setup. Note that clients must start the
+Hadoop services they require. Starting without client services allows this box
+to be used in various Hadoop configurations.
 
     /opt/vagrant/bin/vagrant init hadoop_precise64 http://path-to-hadoop_precise64.box
     /opt/vagrant/bin/vagrant up
@@ -208,34 +210,8 @@ To build the package from scratch, first build `base_precise64`, then:
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
-`VagrantFiles` using this box should forward ports 50030, 50060, 50070 and
-50075 to the host machine for the Hadoop web monitoring interfaces.
-
-    config.vm.forward_port 50030, 50030
-    config.vm.forward_port 50060, 50060
-    config.vm.forward_port 50070, 50070
-    config.vm.forward_port 50075, 50075
-
-The HDFS web interface is available:
-
-    http://localhost:50070/
-
-The Job Tracker web interface is available:
-
-    http://localhost:50030/
-
-The Task Tracker web interface is available:
-
-    http://localhost:50060/
-
-The following is a simple Hadoop execution test:
-
-    $ hadoop fs -put /etc/hadoop input
-    $ hadoop jar /usr/share/hadoop/hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
-    $ hadoop fs -cat output/*
-
-Because the Hadoop init scripts are broken and interdependent, clients that use
-this box should include puppet provisioning like follows:
+Clients that use this box should include puppet provisioning like follows to
+start services:
 
     service {
       "hadoop-namenode":
@@ -285,7 +261,34 @@ this box should include puppet provisioning like follows:
       Service["hadoop-jobtracker"] ->
       Service["hadoop-tasktracker"]
 
-See the example in `examples/hadoop_standalone`.
+The custom service commands are a result of broken init scripts. See the
+examples in `examples/hadoop_standalone` and `examples/hadoop_cluster` for more.
+
+`VagrantFiles` using this box can forward ports 50030, 50060, 50070, and
+50075 to the host machine for the Hadoop web monitoring interfaces.
+
+    config.vm.forward_port 50030, 50030
+    config.vm.forward_port 50060, 50060
+    config.vm.forward_port 50070, 50070
+    config.vm.forward_port 50075, 50075
+
+The HDFS web interface is available:
+
+    http://localhost:50070/
+
+The Job Tracker web interface is available:
+
+    http://localhost:50030/
+
+The Task Tracker web interface is available:
+
+    http://localhost:50060/
+
+The following is a simple Hadoop execution test:
+
+    $ hadoop fs -put /etc/hadoop input
+    $ hadoop jar /usr/share/hadoop/hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
+    $ hadoop fs -cat output/*
 
 
 Examples
@@ -293,12 +296,17 @@ Examples
 Example multi-VM stacks are included under `examples`. At present, these
 include:
 
+* `play_extras`: Simple instance of the `play_extras_lucid64` VM.
 * `elasticsearch_stack`: An application server with a separate ElasticSearch
   backend VM.
+* `mongodb_stack`: An application server with a separate MongoDB backend VM.
 * `elasticsearch_cluster`: An three node cluster of ElasticSearch VMs.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
    the Hadoop services.
-* `mongodb_stack`: An application server with a separate MongoDB backend VM.
+* `hadoop_cluster`: A three node cluster of Hadoop VMs.
+
+TODO: `mongodb_cluster` with replicaset.
+
 
 
 Vagrant Commmands
@@ -311,6 +319,9 @@ Vagrant Commmands
   instance.
 * `/opt/vagrant/bin/vagrant halt`: Turn off the virtual instance. Calling
   `vagrant up` after this is the equivalent of a reboot.
+* `/opt/vagrant/bin/vagrant up --no-provision`: Bring up the virtual instance
+  without doing the provisioning step. Useful if the provisioning step is
+  destructive.
 * `/opt/vagrant/bin/vagrant destroy`: Hose your virtual instance, reclaiming the
   allocated disc space.
 * `/opt/vagrant/bin/vagrant provision`: Rerun puppet or chef provisioning on the

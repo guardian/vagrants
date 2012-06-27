@@ -1,4 +1,4 @@
-class hdfs {
+class namenode-format {
 
   exec {
     "namenode-format":
@@ -13,10 +13,6 @@ class hdfs {
       group => hdfs,
       recurse => true,
       subscribe => Exec["namenode-format"];
-  }
-
-  Service {
-    subscribe => Class["configuration"]
   }
 
   service {
@@ -45,25 +41,17 @@ class hdfs {
       ensure => running;
   }
 
-  file {
-    # Fix up log directory permissions after services start
-    "/var/log/hadoop hdfs_permissions":
-      path => "/var/log/hadoop",
-      owner => root,
-      group => root,
-      mode => 777,
-      recurse => true,
-      subscribe => Service[
-        "hadoop-namenode",
-        "hadoop-secondarynamenode",
-        "hadoop-datanode"
-      ];
+  exec {
+    # Fix up file permissions inside HDFS
+    "hdfs-root-permissions":
+      command => "/usr/bin/hadoop --config /etc/hadoop fs -chmod 777 /",
+      require => Service["hadoop-datanode"];
   }
 
-  File["/hadoop"] ->
+  Exec["namenode-format"] ->
+    File["/hadoop"] ->
     Service["hadoop-namenode"] ->
     Service["hadoop-secondarynamenode"] ->
     Service["hadoop-datanode"] ->
-    File["/var/log/hadoop hdfs_permissions"]
-
+    Exec["hdfs-root-permissions"]
 }

@@ -11,8 +11,7 @@ class hadoop {
   include java
   include hadoop-download
   include configuration
-  include hdfs
-  include mapreduce
+  include namenode-format
 
   package {
     hadoop:
@@ -26,6 +25,5 @@ class hadoop {
   Class["hadoop-download"] ->
     Package["hadoop"] ->
     Class["configuration"] ->
-    Class["hdfs"] ->
-    Class["mapreduce"]
+    Class["namenode-format"]
 }
