@@ -21,14 +21,7 @@ class neo4j {
 
   # The neo4j service doesn't listen to reason.
   exec {
-    neo4j-start:
-      command => "/usr/sbin/service neo4j-service restart",
-      refreshonly => true,
-      subscribe => Class["neo4j-configuration"];
-  }
-
-  service {
-    neo4j-service: ensure => running;
+    neo4j-start: command => "/usr/sbin/service neo4j-service restart";
   }
 
   Class["neo4j-user"] -> Exec["neo4j-install"]
@@ -39,6 +32,5 @@ class neo4j {
     Exec["neo4j-extract"] ->
     Exec["neo4j-install"] ->
     Class["neo4j-configuration"] ->
-    Exec["neo4j-start"] ->
-    Service["neo4j-service"]
+    Exec["neo4j-start"]
 }
