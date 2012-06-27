@@ -111,6 +111,35 @@ A number of ElasticSearch plugins are included in this box. See:
     http://localhost:9200/_plugin/paramedic/index.html
     http://localhost:9200/_plugin/bigdesk/
 
+
+`neo4j_precise64`
+---------------------
+The basic Ubuntu box with a Neo4J installation.
+
+    /opt/vagrant/bin/vagrant init neo4j_precise64 http://path-to-neo4j_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd neo4j_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output neo4j_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 7474.
+
+    config.vm.forward_port 7474, 7474
+
+The Neo4J interface is available at:
+
+    http://localhost:7474
+
+
 `play_precise64`
 --------------
 The basic Ubuntu box with NGINX and a server configuration suitable for a Play
@@ -143,7 +172,7 @@ existing webservers on the host box.
 
 `play_extras_precise64`
 ---------------------
-A version of `play_precise64` with ElasticSearch and Mongodb.
+A version of `play_precise64` with ElasticSearch, Mongodb and Neo4J.
 
     /opt/vagrant/bin/vagrant init play_extras_precise64 http://path-to-play_extras_precise64.box
     /opt/vagrant/bin/vagrant up
@@ -187,6 +216,15 @@ Forward ports 27017 and 28017 to the host machine for MongoDB.
 The MongoDB web interface is available:
 
     http://localhost:28017
+
+Forward port 7474 for Neo4J.
+
+    config.vm.forward_port 7474, 7474
+
+The Neo4J interface is available at:
+
+    http://localhost:7474
+
 
 
 `hadoop_precise64`
@@ -294,15 +332,22 @@ The following is a simple Hadoop execution test:
 Examples
 --------
 Example multi-VM stacks are included under `examples`. At present, these
-include:
+include some standalone single VM:
 
-* `play_extras`: Simple instance of the `play_extras_lucid64` VM.
+* `play_extras_standalone`: Simple instance of the `play_extras_precise64` VM.
+* `neo4j_standalone`: Simple instance of the `neo4j_precise64` VM.
+* `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
+   the Hadoop services.
+
+Some example stacks:
+
 * `elasticsearch_stack`: An application server with a separate ElasticSearch
   backend VM.
 * `mongodb_stack`: An application server with a separate MongoDB backend VM.
+
+And some more complicated clusers:
+
 * `elasticsearch_cluster`: An three node cluster of ElasticSearch VMs.
-* `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
-   the Hadoop services.
 * `hadoop_cluster`: A three node cluster of Hadoop VMs.
 
 TODO: `mongodb_cluster` with replicaset.

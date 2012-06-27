@@ -1,0 +1,10 @@
+name    'neo4j'
+version '0.1'
+source 'git://github.com/guardian/vagrant/puppet/modules/neo4j'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Neo4j installation'
+description 'Manage a Neo4j installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/neo4j'
+
+dependency 'guardian/java', '>= 0.1'

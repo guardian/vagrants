@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOXES="base_precise64 mongodb_precise64 elasticsearch_precise64 play_precise64 play_extras_precise64 hadoop_precise64"
+BOXES="base_precise64 mongodb_precise64 elasticsearch_precise64 neo4j_precise64 play_precise64 play_extras_precise64 hadoop_precise64"
 VAGRANT=/opt/vagrant/bin/vagrant
 
 for BOX in ${BOXES}
