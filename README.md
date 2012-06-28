@@ -358,10 +358,8 @@ Some example stacks:
 And some more complicated clusers:
 
 * `elasticsearch_cluster`: A three node cluster of ElasticSearch VMs.
+* `mongodb_cluster`: A three node replica set cluster of MongoDB VMs.
 * `hadoop_cluster`: A three node cluster of Hadoop VMs.
-
-TODO: `mongodb_cluster` with replicaset.
-
 
 
 Vagrant Commmands

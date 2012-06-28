@@ -1,0 +1,18 @@
+#!/bin/bash
+
+/usr/bin/mongo admin --port=27017 --eval '
+  db.runCommand(
+    {
+      "replSetInitiate" : {
+        "_id" : "mongodb",
+        "members" : [
+           { "_id" : 1, "host" : "mongodb1:27017" },
+           { "_id" : 2, "host" : "mongodb2:27017" },
+           { "_id" : 3, "host" : "mongodb3:27017" }
+         ]
+      }
+    }
+  )
+'
+
+touch /opt/mongodb/init-replica-set.done
