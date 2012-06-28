@@ -4,5 +4,6 @@ class standard-packages {
     bash-completion: ensure => installed;
     vim: ensure => installed;
     curl: ensure => installed;
+    unzip: ensure => installed;
   }
 }
