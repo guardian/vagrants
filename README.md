@@ -8,9 +8,16 @@ and portable development environments." Vagrant itself is a virtual instance
 creation and startup tool on top of Oracle VirtualBox which takes care of the
 virtualisation.
 
-Install the Open Source Edition of VirtualBox and Vagrant itself:
+Install the Open Source Edition of VirtualBox:
 
-    sudo apt-get install virtualbox-ose
+    wget http://download.virtualbox.org/virtualbox/4.1.18/virtualbox-4.1_4.1.18-78361~Ubuntu~natty_amd64.deb
+    sudo dpkg -i virtualbox-4.1_4.1.18-78361~Ubuntu~natty_amd64.deb
+
+If you are using a different version of Ubuntu, substitute the appropriate
+deb from the [VirtualBox download page][virtualbox-download].
+
+Then install Vagrant itself:
+
     wget http://files.vagrantup.com/packages/eb590aa3d936ac71cbf9c64cf207f148ddfc000a/vagrant_1.0.3_x86_64.deb
     sudo dpkg -i vagrant_1.0.3_x86_64.deb
 
@@ -226,7 +233,6 @@ The Neo4J interface is available at:
     http://localhost:7474
 
 
-
 `hadoop_precise64`
 ---------------------
 The basic Ubuntu box with a Hadoop setup. Note that clients must start the
@@ -334,8 +340,11 @@ Examples
 Example multi-VM stacks are included under `examples`. At present, these
 include some standalone single VM:
 
-* `play_extras_standalone`: Simple instance of the `play_extras_precise64` VM.
-* `neo4j_standalone`: Simple instance of the `neo4j_precise64` VM.
+* `elasticsearch_standalone`: A standalone ElasticSearch instance.
+* `monogodb_standalone`: A standalone MongoDB instance.
+* `neo4j_standalone`: A standalone Neo4J instance.
+* `play_extras_standalone`: A standalone instance of the `play_extras_precise64`
+   VM with ElasticSearch, MongoDB and Neo4J.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
    the Hadoop services.
 
@@ -344,10 +353,11 @@ Some example stacks:
 * `elasticsearch_stack`: An application server with a separate ElasticSearch
   backend VM.
 * `mongodb_stack`: An application server with a separate MongoDB backend VM.
+* `neo4j_stack`: An application server with a separate Neo4J backend VM.
 
 And some more complicated clusers:
 
-* `elasticsearch_cluster`: An three node cluster of ElasticSearch VMs.
+* `elasticsearch_cluster`: A three node cluster of ElasticSearch VMs.
 * `hadoop_cluster`: A three node cluster of Hadoop VMs.
 
 TODO: `mongodb_cluster` with replicaset.

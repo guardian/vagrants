@@ -4,10 +4,10 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "../../hadoop_precise64/hadoop_precise64.box"
 
   # config.vm.boot_mode = :gui
-  config.vm.share_folder "puppet-files", "/etc/puppet/files", "files"
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
 
-  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/fileserver.conf", "--debug"] do |puppet|
-    puppet.manifests_path = "."
+  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/vagrant/fileserver.conf", "--debug"] do |puppet|
+    puppet.manifests_path = "vagrant"
     puppet.manifest_file = "site.pp"
   end
 

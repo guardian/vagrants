@@ -1,0 +1,10 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "elasticsearch_precise64"
+  config.vm.box_url = "../../elasticsearch_precise64/elasticsearch_precise64.box"
+
+  # config.vm.boot_mode = :gui
+
+  config.vm.forward_port 9200, 9200
+
+end

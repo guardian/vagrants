@@ -4,14 +4,14 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "../../elasticsearch_precise64/elasticsearch_precise64.box"
 
   # config.vm.boot_mode = :gui
-  config.vm.share_folder "puppet-files", "/etc/puppet/files", "files"
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
 
   config.vm.provision :puppet, :options => [
-      "--fileserverconfig=/vagrant/fileserver.conf",
-      "--templatedir=/vagrant/templates",
+      "--fileserverconfig=/vagrant/vagrant/fileserver.conf",
+      "--templatedir=/vagrant/vagrant/templates",
       "--debug"
     ] do |puppet|
-    puppet.manifests_path = "."
+    puppet.manifests_path = "vagrant"
     puppet.manifest_file = "site.pp"
   end
 
