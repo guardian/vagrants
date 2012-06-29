@@ -1,0 +1,17 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "nginx_precise64"
+  config.vm.box_url = "../../nginx_precise64/nginx_precise64.box"
+
+  # config.vm.boot_mode = :gui
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
+
+  config.vm.forward_port 80, 8000
+  config.vm.forward_port 9000, 9000
+
+  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/vagrant/fileserver.conf", "--debug"] do |puppet|
+    puppet.manifests_path = "vagrant"
+    puppet.manifest_file = "site.pp"
+  end
+
+end

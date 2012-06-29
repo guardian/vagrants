@@ -1,0 +1,15 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "nginx_extras_precise64"
+  config.vm.box_url = "../../nginx_extras_precise64/nginx_extras_precise64.box"
+
+  # config.vm.boot_mode = :gui
+
+  config.vm.forward_port 80, 8000
+  config.vm.forward_port 7474, 7474
+  config.vm.forward_port 9000, 9000
+  config.vm.forward_port 9200, 9200
+  config.vm.forward_port 27017, 27017
+  config.vm.forward_port 28017, 28017
+
+end

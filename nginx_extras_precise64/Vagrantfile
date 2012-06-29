@@ -1,7 +1,7 @@
 Vagrant::Config.run do |config|
 
-  config.vm.box = "play_extras_precise64"
-  config.vm.box_url = "../../play_extras_precise64/play_extras_precise64.box"
+  config.vm.box = "nginx_precise64"
+  config.vm.box_url = "../nginx_precise64/nginx_precise64.box"
 
   # config.vm.boot_mode = :gui
 
@@ -11,5 +11,11 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 9200, 9200
   config.vm.forward_port 27017, 27017
   config.vm.forward_port 28017, 28017
+
+  config.vm.provision :puppet, :options => ["--debug"] do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+    puppet.module_path  = "../puppet/modules"
+  end
 
 end

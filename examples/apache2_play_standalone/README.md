@@ -1,8 +1,8 @@
-`play_extras_standalone`
-========================
+`apache2_play_standalone`
+=========================
 
-A standalone instance of the `play_extras_precise64` VM with ElasticSearch,
-MongoDB and Neo4J.
+A standalone Apache 2 instance demonstrating a proxy configuration suitable for
+a Play application server on the same box.
 
 To use this VM configuration in your own project:
 
