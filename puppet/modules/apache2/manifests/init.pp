@@ -1,7 +1,11 @@
 class apache2 {
 
+  include guardian
+
   package { apache2: ensure => installed; }
   service { apache2: ensure => running; }
 
-  Package["apache2"] -> Service["apache2"]
+  Class["guardian"] ->
+    Package["apache2"] ->
+    Service["apache2"]
 }

@@ -1,5 +1,7 @@
 class zookeeper {
 
+  include guardian
+
   package {
     zookeeper: ensure => installed;
   }
@@ -28,7 +30,8 @@ class zookeeper {
       ensure => running;
   }
 
-  Package["zookeeper"] ->
+  Class["guardian"] ->
+    Package["zookeeper"] ->
     File["/usr/share/zookeeper/conf", "/usr/share/zookeeper/conf/zoo.cfg"] ->
     Service["zookeeper"]
 }

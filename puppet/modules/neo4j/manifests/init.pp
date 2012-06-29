@@ -1,5 +1,6 @@
 class neo4j {
 
+  include guardian
   include java
   include neo4j-user
   include neo4j-download
@@ -28,7 +29,8 @@ class neo4j {
 
   Class["java"] -> Exec["neo4j-install"]
 
-  Class["neo4j-download"] ->
+  Class["guardian"] ->
+    Class["neo4j-download"] ->
     Exec["neo4j-extract"] ->
     Exec["neo4j-install"] ->
     Class["neo4j-configuration"] ->

@@ -24,6 +24,8 @@ class apt {
 
     "/etc/apt/apt.conf.d/31retries":
       source => "puppet:///modules/guardian/etc/apt/apt.conf.d/31retries";
+
+    "/var/cache/apt/archives": ensure => directory;
   }
 
   exec {

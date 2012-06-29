@@ -6,3 +6,5 @@ license 'Apache'
 summary 'Manage an MongoDB installation'
 description 'Manage an MongoDB installation'
 project_page 'https://github.com/guardian/vagrants/puppet/modules/mongodb'
+
+dependency 'guardian/guardian', '>= 0.1'

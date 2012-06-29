@@ -13,8 +13,8 @@ Install the Open Source Edition of VirtualBox:
     wget http://download.virtualbox.org/virtualbox/4.1.18/virtualbox-4.1_4.1.18-78361~Ubuntu~natty_amd64.deb
     sudo dpkg -i virtualbox-4.1_4.1.18-78361~Ubuntu~natty_amd64.deb
 
-If you are using a different version of Ubuntu, substitute the appropriate
-deb from the [VirtualBox download page][virtualbox-download].
+If you are using a different version of Ubuntu, substitute the appropriate deb
+from the [VirtualBox download page][virtualbox-download].
 
 Then install Vagrant itself:
 
@@ -458,7 +458,6 @@ but briefly:
 3. Edit Security -> System Security (I wasn't expecting it here either!)
 4. Enable VT-x and VT-d settings.
 5. Save and exit.
-
 
 [vagrant]: http://vagrantup.com
 [virtualbox-download]: https://www.virtualbox.org/wiki/Linux_Downloads

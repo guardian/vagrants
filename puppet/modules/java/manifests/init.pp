@@ -1,5 +1,7 @@
 class java {
 
+  include guardian
+
   File {
     owner => root,
     group => root,
@@ -15,4 +17,6 @@ class java {
   package {
     openjdk-6-jdk: ensure => present;
   }
+
+  Class["guardian"] -> Package["openjdk-6-jdk"]
 }

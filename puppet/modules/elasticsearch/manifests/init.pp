@@ -1,8 +1,16 @@
 class elasticsearch {
 
+  include guardian
   include java
-  include elasticsearch-download
   include elasticsearch-plugins
+
+  exec {
+    "download-elasticsearch-deb":
+      command => "/usr/bin/wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.4.deb",
+      cwd => "/var/cache/apt/archives",
+      creates => "/var/cache/apt/archives/elasticsearch-0.19.4.deb",
+      timeout => 0;
+  }
 
   package {
     elasticsearch:
@@ -15,7 +23,8 @@ class elasticsearch {
 
   Class["java"] -> Package["elasticsearch"]
 
-  Class["elasticsearch-download"] ->
+  Class["guardian"] ->
+    Exec["download-elasticsearch-deb"] ->
     Package["elasticsearch"] ->
     Class["elasticsearch-plugins"] ->
     Service["elasticsearch"]

@@ -8,3 +8,4 @@ description 'Manage a hadoop installation'
 project_page 'https://github.com/guardian/vagrants/puppet/modules/hadoop'
 
 dependency 'guardian/java', '>= 0.1'
+dependency 'guardian/guardian', '>= 0.1'

@@ -6,3 +6,5 @@ license 'Apache'
 summary 'Manage an Apache installation'
 description 'Manage an Apache installation'
 project_page 'https://github.com/guardian/vagrants/puppet/modules/apache2'
+
+dependency 'guardian/guardian', '>= 0.1'

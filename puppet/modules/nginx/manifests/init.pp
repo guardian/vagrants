@@ -1,11 +1,13 @@
 class nginx {
 
+  include guardian
   include nginx-repository
 
   package { nginx: ensure => installed; }
   service { nginx: ensure => running; }
 
-  Class["nginx-repository"] ->
+  Class["guardian"] ->
+    Class["nginx-repository"] ->
     Package["nginx"] ->
     Service["nginx"]
 }

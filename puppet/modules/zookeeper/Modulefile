@@ -6,3 +6,5 @@ license 'Apache'
 summary 'Manage a Zookeeper installation'
 description 'Manage a Zookeeper installation'
 project_page 'https://github.com/guardian/vagrants/puppet/modules/zookeeper'
+
+dependency 'guardian/guardian', '>= 0.1'
