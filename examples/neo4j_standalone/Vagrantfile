@@ -1,7 +1,7 @@
 Vagrant::Config.run do |config|
 
   config.vm.box = "neo4j_precise64"
-  config.vm.box_url = "../../neo4j_precise64/neo4j_precise64.box"
+  config.vm.box_url = "../../output/neo4j_precise64.box"
 
   # config.vm.boot_mode = :gui
 

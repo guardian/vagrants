@@ -53,7 +53,7 @@ To build the package from scratch:
 
     cd base_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output base_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/base_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -73,7 +73,7 @@ To build the package from scratch:
 
     cd nginx_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output nginx_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/nginx_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -100,7 +100,7 @@ To build the package from scratch:
 
     cd nginx_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output nginx_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/nginx_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -127,7 +127,7 @@ To build the package from scratch, first build `base_precise64`, then:
 
     cd mongodb_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output mongodb_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/mongodb_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -157,7 +157,7 @@ To build the package from scratch, first build `base_precise64`, then:
 
     cd elasticsearch_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output elasticsearch_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/elasticsearch_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -187,7 +187,7 @@ To build the package from scratch, first build `base_precise64`, then:
 
     cd neo4j_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output neo4j_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/neo4j_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -217,7 +217,7 @@ To build the package from scratch, first build `base_precise64`, then:
 
     cd hadoop_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output hadoop_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/hadoop_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -317,7 +317,7 @@ To build the package from scratch, first build `nginx_precise64`, then:
 
     cd nginx_extras_precise64
     /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output nginx_extras_precise64.box
+    /opt/vagrant/bin/vagrant package --output ../output/nginx_extras_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 

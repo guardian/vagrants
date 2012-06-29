@@ -1,7 +1,7 @@
 Vagrant::Config.run do |config|
 
   config.vm.box = "nginx_precise64"
-  config.vm.box_url = "../nginx_precise64/nginx_precise64.box"
+  config.vm.box_url = "../output/nginx_precise64.box"
 
   # config.vm.boot_mode = :gui
 

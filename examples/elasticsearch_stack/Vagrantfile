@@ -13,7 +13,7 @@ Vagrant::Config.run do |config|
     appserver.vm.network :hostonly, "10.0.0.2"
 
     appserver.vm.box = "play_precise64"
-    appserver.vm.box_url = "../../play_precise64/play_precise64.box"
+    appserver.vm.box_url = "../../output/play_precise64.box"
 
     appserver.vm.forward_port 80, 8000
     appserver.vm.forward_port 9000, 9000
@@ -24,7 +24,7 @@ Vagrant::Config.run do |config|
     elasticsearch.vm.network :hostonly, "10.0.0.3"
 
     elasticsearch.vm.box = "elasticsearch_precise64"
-    elasticsearch.vm.box_url = "../../elasticsearch_precise64/elasticsearch_precise64.box"
+    elasticsearch.vm.box_url = "../../output/elasticsearch_precise64.box"
 
     elasticsearch.vm.forward_port 9200, 9200
   end
