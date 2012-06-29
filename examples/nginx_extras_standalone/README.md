@@ -2,7 +2,7 @@
 ========================
 
 A standalone instance of the `nginx_extras_precise64` VM with ElasticSearch,
-MongoDB and Neo4J.
+MongoDB, Neo4J and Hadoop.
 
 To use this VM configuration in your own project:
 

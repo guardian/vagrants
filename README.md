@@ -304,7 +304,7 @@ The following is a simple Hadoop execution test:
 
 `nginx_extras_precise64`
 ---------------------
-A version of `nginx_precise64` with ElasticSearch, Mongodb and Neo4J.
+A version of `nginx_precise64` with ElasticSearch, Mongodb, Neo4J and Hadoop.
 
     /opt/vagrant/bin/vagrant init play_extras_precise64 http://path-to-nginx_extras_precise64.box
     /opt/vagrant/bin/vagrant up
@@ -321,11 +321,9 @@ To build the package from scratch, first build `nginx_precise64`, then:
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
-`VagrantFiles` using this box should forward port 80 to the host machine. Port
-9000 is also useful for direct access to the Play Framework application.
+`VagrantFiles` using this box should forward port 80 to the host machine.
 
     config.vm.forward_port 80, 8000
-    config.vm.forward_port 9000, 9000
 
 This forwards port 80 to port 8000 on the host machine to avoid clashes with
 existing webservers on the host box.
@@ -357,6 +355,26 @@ The Neo4J interface is available at:
 
     http://localhost:7474
 
+`VagrantFiles` using this box can forward ports 50030, 50060, 50070, and
+50075 to the host machine for the Hadoop web monitoring interfaces.
+
+    config.vm.forward_port 50030, 50030
+    config.vm.forward_port 50060, 50060
+    config.vm.forward_port 50070, 50070
+    config.vm.forward_port 50075, 50075
+
+The HDFS web interface is available:
+
+    http://localhost:50070/
+
+The Job Tracker web interface is available:
+
+    http://localhost:50030/
+
+The Task Tracker web interface is available:
+
+    http://localhost:50060/
+
 
 Examples
 --------
@@ -368,8 +386,9 @@ include some standalone single VM:
 * `neo4j_standalone`: A standalone Neo4J instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
    the Hadoop services.
-* `nginx_extras_standalone`: A standalone instance of the `nginx_extras_precise64`
-   VM with ElasticSearch, MongoDB and Neo4J.
+* `nginx_extras_standalone`: A standalone instance of the
+  `nginx_extras_precise64` VM with ElasticSearch, MongoDB, Neo4J and Hadoop.
+  Basically, all the toys.
 
 Some example webserver configurations:
 

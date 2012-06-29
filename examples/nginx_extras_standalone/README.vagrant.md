@@ -46,6 +46,18 @@ The Neo4J interface is available at:
 
     http://localhost:7474
 
+The HDFS web interface is available:
+
+    http://localhost:50070/
+
+The Job Tracker web interface is available:
+
+    http://localhost:50030/
+
+The Task Tracker web interface is available:
+
+    http://localhost:50060/
+
 
 Vagrant Commmands
 -----------------
