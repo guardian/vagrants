@@ -302,6 +302,13 @@ The following is a simple Hadoop execution test:
     $ hadoop fs -cat output/*
 
 
+`aws_elastic_mapreduce_hadoop_precise64`
+----------------------------------------
+The `hadoop_precise64` box but with the same version of Hadoop used in Amazon
+Web Services Elastic MapReduce. Note the Amazon distribution has some minor
+variations. Use is as per `hadoop_precise64`.
+
+
 `nginx_extras_precise64`
 ---------------------
 A version of `nginx_precise64` with ElasticSearch, Mongodb, Neo4J and Hadoop.
@@ -385,7 +392,9 @@ include some standalone single VM:
 * `monogodb_standalone`: A standalone MongoDB instance.
 * `neo4j_standalone`: A standalone Neo4J instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
-   the Hadoop services.
+  the Hadoop services.
+* `aws_elastic_mapreduce_standalone`: A standalone AWS Elastic MapReduce
+  example.
 * `nginx_extras_standalone`: A standalone instance of the
   `nginx_extras_precise64` VM with ElasticSearch, MongoDB, Neo4J and Hadoop.
   Basically, all the toys.
