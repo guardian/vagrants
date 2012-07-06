@@ -301,6 +301,18 @@ The following is a simple Hadoop execution test:
     $ hadoop jar /usr/share/hadoop/hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
     $ hadoop fs -cat output/*
 
+This VM comes with Apache Pig installed. The following is a simple Pig execution
+test:
+
+    $ hadoop fs -put /etc/passwd passwd
+    $ pig
+    grunt> A = load 'passwd' using PigStorage(':');
+    grunt> B = foreach A generate $0 as id;
+    grunt> dump B;
+
+See the example in `examples/hadoop_pig_standalone` for a Vagrant configuration
+that includes restarting the Hadoop services.
+
 
 `aws_elastic_mapreduce_hadoop_precise64`
 ----------------------------------------

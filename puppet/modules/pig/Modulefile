@@ -1,0 +1,11 @@
+name    'pig'
+version '0.1'
+source 'git://github.com/guardian/vagrants/puppet/modules/pig'
+author 'guardian'
+license 'Apache'
+summary 'Manage an Apache Pig installation'
+description 'Manage a pig installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/pig'
+
+dependency 'guardian/java', '>= 0.1'
+dependency 'guardian/guardian', '>= 0.1'
