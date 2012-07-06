@@ -310,8 +310,18 @@ test:
     grunt> B = foreach A generate $0 as id;
     grunt> dump B;
 
-See the example in `examples/hadoop_pig_standalone` for a Vagrant configuration
-that includes restarting the Hadoop services.
+This VM also comes with Apache Hive installed. The following is a simple Hive
+execution test:
+
+    $ wget 'http://www.grouplens.org/system/files/ml-100k.zip'
+    $ unzip ml-100k.zip
+    $ hive
+    > CREATE TABLE u_data (userid INT, movieid INT, rating INT, unixtime STRING)
+      ROW FORMAT DELIMITED
+      FIELDS TERMINATED BY '\t'
+      STORED AS TEXTFILE;
+    > LOAD DATA LOCAL INPATH 'ml-100k/u.data' OVERWRITE INTO TABLE u_data;
+    > SELECT COUNT(*) FROM u_data;
 
 
 `aws_elastic_mapreduce_hadoop_precise64`
