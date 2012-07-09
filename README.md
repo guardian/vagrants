@@ -200,6 +200,30 @@ The Neo4J interface is available at:
     http://localhost:7474
 
 
+`mysql_precise64`
+---------------------
+The basic Ubuntu box with a MySQL installation.
+
+    /opt/vagrant/bin/vagrant init mysql_precise64 http://path-to-mysql_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd mysql_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output ../output/mysql_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 3306.
+
+    config.vm.forward_port 3306, 3306
+
+
 `hadoop_precise64`
 ---------------------
 The basic Ubuntu box with a Hadoop setup. Note that clients must start the
@@ -413,6 +437,7 @@ include some standalone single VM:
 * `elasticsearch_standalone`: A standalone ElasticSearch instance.
 * `monogodb_standalone`: A standalone MongoDB instance.
 * `neo4j_standalone`: A standalone Neo4J instance.
+* `mysql_standalone`: A standalone MySQL instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
   the Hadoop services.
 * `aws_elastic_mapreduce_standalone`: A standalone AWS Elastic MapReduce
