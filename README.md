@@ -435,7 +435,7 @@ Example multi-VM stacks are included under `examples`. At present, these
 include some standalone single VM:
 
 * `elasticsearch_standalone`: A standalone ElasticSearch instance.
-* `monogodb_standalone`: A standalone MongoDB instance.
+* `mongodb_standalone`: A standalone MongoDB instance.
 * `neo4j_standalone`: A standalone Neo4J instance.
 * `mysql_standalone`: A standalone MySQL instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
