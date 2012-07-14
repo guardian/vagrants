@@ -347,6 +347,11 @@ execution test:
     > LOAD DATA LOCAL INPATH 'ml-100k/u.data' OVERWRITE INTO TABLE u_data;
     > SELECT COUNT(*) FROM u_data;
 
+This VM also comes with Apache Flume installed. It can be started manually with:
+
+    flume-ng node --conf /etc/flume-ng/ --conf-file /etc/flume-ng/flume.conf --name foo
+
+
 
 `aws_elastic_mapreduce_hadoop_precise64`
 ----------------------------------------

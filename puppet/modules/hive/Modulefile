@@ -1,6 +1,6 @@
 name    'hive'
 version '0.1'
-source 'git://github.com/guardian/vagrant/puppet/modules/hive'
+source 'git://github.com/guardian/vagrants/puppet/modules/hive'
 author 'guardian'
 license 'Apache'
 summary 'Manage a Hive installation'

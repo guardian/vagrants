@@ -30,10 +30,12 @@ class hive($hive_version = '0.9.0') {
       source => "puppet:///modules/hive/etc/profile.d/hive.sh";
   }
 
-  class {
-    'hive-download':
-      url => "$download_url",
-      filename => "$download_filename";
+  exec {
+    "hive-download":
+      command => "/usr/bin/wget $download_url",
+      cwd => "/var/cache/downloads",
+      creates => "/var/cache/downloads/$download_filename",
+      timeout => 0;
   }
 
   exec {
@@ -45,7 +47,7 @@ class hive($hive_version = '0.9.0') {
 
   Class["guardian"] ->
     Class["java"] ->
-    Class["hive-download"] ->
+    Exec["hive-download"] ->
     Exec["hive-extract"] ->
     Class["hive-configuration"]
 
