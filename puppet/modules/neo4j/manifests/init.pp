@@ -3,8 +3,15 @@ class neo4j {
   include guardian
   include java
   include neo4j-user
-  include neo4j-download
   include neo4j-configuration
+
+  exec {
+    "neo4j-download":
+      command => "/usr/bin/wget http://dist.neo4j.org/neo4j-community-1.7.2-unix.tar.gz",
+      cwd => "/var/cache/downloads",
+      creates => "/var/cache/downloads/neo4j-community-1.7.2-unix.tar.gz",
+      timeout => 0;
+  }
 
   exec {
     neo4j-extract:
@@ -30,7 +37,7 @@ class neo4j {
   Class["java"] -> Exec["neo4j-install"]
 
   Class["guardian"] ->
-    Class["neo4j-download"] ->
+    Exec["neo4j-download"] ->
     Exec["neo4j-extract"] ->
     Exec["neo4j-install"] ->
     Class["neo4j-configuration"] ->
