@@ -1,0 +1,10 @@
+name    'r'
+version '0.1'
+source 'git://github.com/guardian/vagrants/puppet/modules/r'
+author 'guardian'
+license 'Apache'
+summary 'Manage an R installation'
+description 'Manage an R installation'
+project_page 'https://github.com/guardian/vagrants/puppet/modules/r'
+
+dependency 'guardian/guardian', '>= 0.1'
