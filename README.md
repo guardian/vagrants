@@ -224,6 +224,47 @@ The puppet provisioning during the `vagrant up` step may take some time.
     config.vm.forward_port 3306, 3306
 
 
+
+`zookeeper_precise64`
+---------------------
+The basic Ubuntu box with a Zookeeper installation.
+
+    /opt/vagrant/bin/vagrant init zookeeper_precise64 http://path-to-zookeeper_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd zookeeper_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output ../output/zookeeper_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box can forward port 2181 to potentially acccess the
+Zookeeper data from the host machine.
+
+    config.vm.forward_port 2181, 2181
+
+The `ZooInspector` tool can be used from the VMs with X forwarding to inspect
+the ZooKeeper configuration. Ensure X forwarding is enabled in the
+`Vagrantfile`:
+
+    config.ssh.forward_x11 = true
+
+On the host machine, add an `xhost` for the Vagrant VM:
+
+    xhost +10.0.0.2
+
+Then ssh to the VM and start `zooinspector`:
+
+    /opt/vagrant/bin/vagrant ssh
+    > zooinspector
+
+
 `hadoop_precise64`
 ---------------------
 The basic Ubuntu box with a Hadoop setup. Note that clients must start the
@@ -450,6 +491,7 @@ include some standalone single VM:
 * `nginx_extras_standalone`: A standalone instance of the
   `nginx_extras_precise64` VM with ElasticSearch, MongoDB, Neo4J and Hadoop.
   Basically, all the toys.
+* `zookeeper_standalone`: A standalone Zookeeper instance.
 
 Some example webserver configurations:
 
@@ -470,6 +512,7 @@ And some more complicated clusers:
 * `elasticsearch_cluster`: A three node cluster of ElasticSearch VMs.
 * `mongodb_cluster`: A three node replica set cluster of MongoDB VMs.
 * `hadoop_cluster`: A three node cluster of Hadoop VMs.
+* `zookeeper_cluster`: A three node cluster of Zookeeper VMs.
 
 
 Vagrant Commmands
@@ -489,6 +532,21 @@ Vagrant Commmands
   allocated disc space.
 * `/opt/vagrant/bin/vagrant provision`: Rerun puppet or chef provisioning on the
   virtual instance.
+
+
+Vagrant SSH X Forwarding
+------------------------
+X applications on VMs can be displayed on the host machine by specifying a
+Vagrant SSH connection with X11 forwarding in the `Vagrantfile`:
+
+    config.ssh.forward_x11 = true
+
+On the host machine, add an `xhost` for the Vagrant VM:
+
+    xhost +10.0.0.2
+
+Then X applications started from the VM should display on the host machine.
+
 
 
 Vagrant Troubleshooting

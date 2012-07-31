@@ -1,0 +1,40 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "zookeeper_precise64"
+  config.vm.box_url = "../../output/zookeeper_precise64.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
+
+  config.vm.provision :puppet, :options => [
+      "--fileserverconfig=/vagrant/vagrant/fileserver.conf",
+      "--templatedir=/vagrant/vagrant/templates",
+      "--debug"
+    ] do |puppet|
+    puppet.manifests_path = "vagrant"
+    puppet.manifest_file = "site.pp"
+  end
+
+  config.vm.define :zookeeper1 do |zookeeper1|
+    zookeeper1.vm.host_name = "zookeeper1"
+    zookeeper1.vm.network :hostonly, "10.0.0.2"
+
+    zookeeper1.vm.forward_port 2181, 2181
+  end
+
+  config.vm.define :zookeeper2 do |zookeeper2|
+    zookeeper2.vm.host_name = "zookeeper2"
+    zookeeper2.vm.network :hostonly, "10.0.0.3"
+
+    zookeeper2.vm.forward_port 2181, 2182
+  end
+
+  config.vm.define :zookeeper3 do |zookeeper3|
+    zookeeper3.vm.host_name = "zookeeper3"
+    zookeeper3.vm.network :hostonly, "10.0.0.4"
+
+    zookeeper3.vm.forward_port 2181, 2183
+  end
+
+end

@@ -1,0 +1,17 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "base_precise64"
+  config.vm.box_url = "../output/base_precise64.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+
+  config.vm.forward_port 2181, 2181
+
+  config.vm.provision :puppet, :options => ["--debug"] do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+    puppet.module_path  = "../puppet/modules"
+  end
+
+end
