@@ -5,6 +5,7 @@ Vagrant::Config.run do |config|
 
   # config.vm.boot_mode = :gui
   config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
+  config.ssh.forward_x11 = true
 
   config.vm.provision :puppet, :options => [
       "--fileserverconfig=/vagrant/vagrant/fileserver.conf",

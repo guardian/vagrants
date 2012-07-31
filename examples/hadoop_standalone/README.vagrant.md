@@ -70,6 +70,20 @@ Vagrant Commmands
   virtual instance.
 
 
+Vagrant SSH X Forwarding
+------------------------
+X applications on VMs can be displayed on the host machine by specifying a
+Vagrant SSH connection with X11 forwarding in the `Vagrantfile`:
+
+    config.ssh.forward_x11 = true
+
+On the host machine, add an `xhost` for the Vagrant VM:
+
+    xhost +10.0.0.2
+
+Then X applications started from the VM should display on the host machine.
+
+
 Vagrant Troubleshooting
 -----------------------
 
