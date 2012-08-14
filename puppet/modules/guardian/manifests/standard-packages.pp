@@ -5,7 +5,8 @@ class standard-packages {
       bash-completion,
       vim,
       curl,
-      unzip
+      unzip,
+      ntp
     ]: ensure => latest;
   }
 }

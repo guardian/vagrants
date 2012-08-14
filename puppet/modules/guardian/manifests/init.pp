@@ -4,5 +4,7 @@ class guardian {
   include apt
   include standard-packages
 
-  Class["apt"] -> Class["standard-packages"]
+  service { ntp: ensure => running }
+
+  Class["apt"] -> Class["standard-packages"] -> Service["ntp"]
 }
