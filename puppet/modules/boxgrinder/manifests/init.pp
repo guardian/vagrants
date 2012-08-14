@@ -13,6 +13,17 @@ class boxgrinder {
     boxgrinder-build: ensure => latest;
   }
 
+  File {
+    owner => root,
+    group => root,
+    mode => 644
+  }
+
+  file {
+    "/etc/vmbuilder.cfg":
+      source => "puppet:///modules/boxgrinder/etc/vmbuilder.cfg";
+  }
+
   Class["guardian"] ->
     Class["boxgrinder-repository"] ->
     Exec["boxgrinder libguestfs-tools"] ->
