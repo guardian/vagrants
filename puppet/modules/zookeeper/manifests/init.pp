@@ -3,7 +3,7 @@ class zookeeper {
   include guardian
 
   package {
-    zookeeperd: ensure => installed;
+    zookeeperd: ensure => latest;
   }
 
   service {

@@ -3,7 +3,7 @@ class nginx {
   include guardian
   include nginx-repository
 
-  package { nginx: ensure => installed; }
+  package { nginx: ensure => latest; }
   service { nginx: ensure => running; }
 
   Class["guardian"] ->

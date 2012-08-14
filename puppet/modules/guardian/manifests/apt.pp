@@ -29,12 +29,12 @@ class apt {
   }
 
   exec {
-    apt-update-sources:
-      command => "/usr/bin/apt-get update",
-      subscribe => File["/etc/apt/sources.list"],
+    "apt-update":
+      command => "/usr/bin/apt-get update -y",
+      subscribe => File["/etc/apt/sources.list", "/etc/apt/apt.conf.d/30timeout", "/etc/apt/apt.conf.d/31retries"],
       refreshonly => true;
   }
 
-  File["/etc/apt/apt.conf.d/30timeout", "/etc/apt/apt.conf.d/31retries"] ->
-    Exec["apt-update-sources"]
+  File["/etc/apt/sources.list", "/etc/apt/apt.conf.d/30timeout", "/etc/apt/apt.conf.d/31retries"] ->
+    Exec["apt-update"]
 }

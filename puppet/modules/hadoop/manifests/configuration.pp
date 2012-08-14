@@ -29,26 +29,32 @@ class configuration {
 
     "/etc/init.d/hadoop/common":
       source => "puppet:///modules/hadoop/etc/init.d/hadoop/common",
+      require => File["/etc/init.d/hadoop"],
       mode => 4755;
 
     "/etc/init.d/hadoop/namenode":
       source => "puppet:///modules/hadoop/etc/init.d/hadoop/namenode",
+      require => File["/etc/init.d/hadoop"],
       mode => 4755;
 
     "/etc/init.d/hadoop/secondarynamenode":
       source => "puppet:///modules/hadoop/etc/init.d/hadoop/secondarynamenode",
+      require => File["/etc/init.d/hadoop"],
       mode => 4755;
 
     "/etc/init.d/hadoop/datanode":
       source => "puppet:///modules/hadoop/etc/init.d/hadoop/datanode",
+      require => File["/etc/init.d/hadoop"],
       mode => 4755;
 
     "/etc/init.d/hadoop/jobtracker":
       source => "puppet:///modules/hadoop/etc/init.d/hadoop/jobtracker",
+      require => File["/etc/init.d/hadoop"],
       mode => 4755;
 
     "/etc/init.d/hadoop/tasktracker":
       source => "puppet:///modules/hadoop/etc/init.d/hadoop/tasktracker",
+      require => File["/etc/init.d/hadoop"],
       mode => 4755;
   }
 }

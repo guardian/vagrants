@@ -25,7 +25,7 @@ class nginx-repository {
   }
 
   exec {
-    apt-get-update:
+    "nginx apt-get update":
       command => "/usr/bin/apt-get update",
       subscribe => File[
         "/etc/apt/trusted.gpg.d/nginx.gpg",

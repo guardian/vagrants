@@ -2,7 +2,7 @@ class apache2 {
 
   include guardian
 
-  package { apache2: ensure => installed; }
+  package { apache2: ensure => latest; }
   service { apache2: ensure => running; }
 
   Class["guardian"] ->

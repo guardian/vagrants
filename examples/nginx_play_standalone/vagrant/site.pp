@@ -1,6 +1,6 @@
 node default {
 
-  package { nginx: ensure => installed; }
+  package { nginx: ensure => latest; }
   service { nginx: ensure => running; }
 
   Package["nginx"] -> Service["nginx"]

@@ -4,8 +4,8 @@ class mysql {
   include mysql-configuration
 
   package {
-    "mysql-server": ensure => installed;
-    "mysql-client": ensure => installed;
+    "mysql-server": ensure => latest;
+    "mysql-client": ensure => latest;
   }
 
   service {

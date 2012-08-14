@@ -1,29 +1,26 @@
 class hive-configuration {
 
+  Service {
+    provider => "init",
+    hasstatus => true,
+    ensure => running
+  }
+
   service {
     "hive-hadoop-namenode":
-      provider => "init",
-      hasstatus => true,
       start => "/etc/init.d/hadoop/namenode start",
       status => "/etc/init.d/hadoop/namenode status",
-      stop => "/etc/init.d/hadoop/namenode stop",
-      ensure => running;
+      stop => "/etc/init.d/hadoop/namenode stop";
 
     "hive-hadoop-secondarynamenode":
-      provider => "init",
-      hasstatus => true,
       start => "/etc/init.d/hadoop/secondarynamenode start",
       status => "/etc/init.d/hadoop/secondarynamenode status",
-      stop => "/etc/init.d/hadoop/secondarynamenode stop",
-      ensure => running;
+      stop => "/etc/init.d/hadoop/secondarynamenode stop";
 
     "hive-hadoop-datanode":
-      provider => "base",
-      hasstatus => true,
       start => "/etc/init.d/hadoop/datanode start",
       status => "/etc/init.d/hadoop/datanode status",
-      stop => "/etc/init.d/hadoop/datanode stop",
-      ensure => running;
+      stop => "/etc/init.d/hadoop/datanode stop";
   }
 
   exec {

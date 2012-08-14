@@ -1,6 +1,6 @@
 node default {
 
-  package { apache2: ensure => installed; }
+  package { apache2: ensure => latest; }
   service { apache2: ensure => running; }
 
   Package["apache2"] -> Service["apache2"]

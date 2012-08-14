@@ -25,7 +25,7 @@ class cran-repository {
   }
 
   exec {
-    apt-get-update:
+    "cran apt-get update":
       command => "/usr/bin/apt-get update",
       subscribe => File[
         "/etc/apt/trusted.gpg.d/cran.gpg",

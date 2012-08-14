@@ -7,7 +7,10 @@ class base-installation {
   }
 
   file {
-    "/etc/gu": ensure => directory;
+    [
+      "/etc/gu",
+      "/var/cache/downloads"
+    ]: ensure => directory;
 
     "/etc/gu/install_vars":
       source => "puppet:///modules/guardian/etc/gu/install_vars";

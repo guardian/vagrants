@@ -25,8 +25,8 @@ class 10gen-repository {
   }
 
   exec {
-    apt-get-update:
-      command => "/usr/bin/apt-get update",
+    "10gen apt-get update":
+      command => "/usr/bin/apt-get update -y",
       subscribe => File[
         "/etc/apt/trusted.gpg.d/10gen.gpg",
         "/etc/apt/sources.list.d/10gen-upstart.list"
