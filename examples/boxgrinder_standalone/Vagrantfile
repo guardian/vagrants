@@ -1,0 +1,9 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "boxgrinder_precise64"
+  config.vm.box_url = "../../output/boxgrinder_precise64.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+
+end

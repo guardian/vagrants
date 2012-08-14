@@ -224,7 +224,6 @@ The puppet provisioning during the `vagrant up` step may take some time.
     config.vm.forward_port 3306, 3306
 
 
-
 `zookeeper_precise64`
 ---------------------
 The basic Ubuntu box with a Zookeeper installation.
@@ -393,6 +392,26 @@ This VM also comes with Apache Flume installed. It can be started manually with:
     flume-ng node --conf /etc/flume-ng/ --conf-file /etc/flume-ng/flume.conf --name foo
 
 
+`boxgrinder_precise64`
+---------------------
+The basic Ubuntu box with a Boxgrinder installation for building VMs.
+
+    /opt/vagrant/bin/vagrant init boxgrinder_precise64 http://path-to-boxgrinder_precise64.box
+    /opt/vagrant/bin/vagrant up
+
+And ssh onto it:
+
+    /opt/vagrant/bin/vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    cd boxgrinder_precise64
+    /opt/vagrant/bin/vagrant up
+    /opt/vagrant/bin/vagrant package --output ../output/boxgrinder_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+
 
 Examples
 --------
@@ -409,6 +428,7 @@ include some standalone single VM:
   `nginx_extras_precise64` VM with ElasticSearch, MongoDB, Neo4J and Hadoop.
   Basically, all the toys.
 * `zookeeper_standalone`: A standalone Zookeeper instance.
+* `boxgrinder_standalone`: A standalone Boxgrinder instance.
 
 Some example webserver configurations:
 
