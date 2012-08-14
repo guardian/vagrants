@@ -1,4 +1,4 @@
-class hadoop($hadoop_version = '1.0.3') {
+class hadoop {
 
   if $operatingsystem != "ubuntu" {
     fail("Unsupported operating system: $operatingsystem")
@@ -8,23 +8,8 @@ class hadoop($hadoop_version = '1.0.3') {
     fail("Unsupported distribution: $lsbdistcodename")
   }
 
-  $hadoop_distributions = {
-    '0.20.205.0' => {
-      'url' => 'http://mirror.ox.ac.uk/sites/rsync.apache.org/hadoop/common/hadoop-0.20.205.0/hadoop_0.20.205.0-1_i386.deb',
-      'filename' => 'hadoop_0.20.205.0-1_i386.deb'
-    },
-    '1.0.3' => {
-      'url' => 'http://mirror.ox.ac.uk/sites/rsync.apache.org/hadoop/common/hadoop-1.0.3/hadoop_1.0.3-1_x86_64.deb',
-      'filename' => 'hadoop_1.0.3-1_x86_64.deb'
-    }
-  }
-
-  $download_url = $hadoop_distributions[$hadoop_version]['url']
-  $download_filename = $hadoop_distributions[$hadoop_version]['filename']
-
-  if (!$download_url) {
-    fail("Unsupported Hadoop distribution: ${hadoop_version}")
-  }
+  $download_url ='http://mirror.ox.ac.uk/sites/rsync.apache.org/hadoop/common/hadoop-1.0.3/hadoop_1.0.3-1_x86_64.deb'
+  $download_filename ='hadoop_1.0.3-1_x86_64.deb'
 
   include guardian
   include java

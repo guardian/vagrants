@@ -1,25 +1,8 @@
-class hive($hive_version = '0.9.0') {
+class hive {
 
-  $hive_distributions = {
-    '0.9.0' => {
-      'url' => 'http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-0.9.0/hive-0.9.0.tar.gz',
-      'filename' => 'hive-0.9.0.tar.gz',
-      'extracted' => 'hive-0.9.0'
-    },
-    '0.8.1' => {
-      'url' => 'http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-0.8.1/hive-0.8.1.tar.gz',
-      'filename' => 'hive-0.8.1.tar.gz',
-      'extracted' => 'hive-0.8.1'
-    }
-  }
-
-  $download_url = $hive_distributions[$hive_version]['url']
-  $download_filename = $hive_distributions[$hive_version]['filename']
-  $download_extracted = $hive_distributions[$hive_version]['extracted']
-
-  if (!$download_url) {
-    fail("Unsupported Pig distribution: ${hive_version}")
-  }
+  $download_url = 'http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-0.9.0/hive-0.9.0.tar.gz'
+  $download_filename = 'hive-0.9.0.tar.gz'
+  $download_extracted = 'hive-0.9.0'
 
   include guardian
   include java

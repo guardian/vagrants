@@ -394,87 +394,6 @@ This VM also comes with Apache Flume installed. It can be started manually with:
 
 
 
-`aws_elastic_mapreduce_hadoop_precise64`
-----------------------------------------
-The `hadoop_precise64` box but with the same version of Hadoop used in Amazon
-Web Services Elastic MapReduce. Note the Amazon distribution has some minor
-variations. Use is as per `hadoop_precise64`.
-
-
-`nginx_extras_precise64`
----------------------
-A version of `nginx_precise64` with ElasticSearch, Mongodb, Neo4J and Hadoop.
-
-    /opt/vagrant/bin/vagrant init play_extras_precise64 http://path-to-nginx_extras_precise64.box
-    /opt/vagrant/bin/vagrant up
-
-And ssh onto it:
-
-    /opt/vagrant/bin/vagrant ssh
-
-To build the package from scratch, first build `nginx_precise64`, then:
-
-    cd nginx_extras_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/nginx_extras_precise64.box
-
-The puppet provisioning during the `vagrant up` step may take some time.
-
-`VagrantFiles` using this box should forward port 80 to the host machine.
-
-    config.vm.forward_port 80, 8000
-
-This forwards port 80 to port 8000 on the host machine to avoid clashes with
-existing webservers on the host box.
-
-In addition, forward port 9200 for ElasticSearch.
-
-    config.vm.forward_port 9200, 9200
-
-A number of ElasticSearch plugins are included in this box. See:
-
-    http://localhost:9200/_plugin/head/
-    http://localhost:9200/_plugin/paramedic/index.html
-    http://localhost:9200/_plugin/bigdesk/
-
-Forward ports 27017 and 28017 to the host machine for MongoDB.
-
-    config.vm.forward_port 27017, 27017
-    config.vm.forward_port 28017, 28017
-
-The MongoDB web interface is available:
-
-    http://localhost:28017
-
-Forward port 7474 for Neo4J.
-
-    config.vm.forward_port 7474, 7474
-
-The Neo4J interface is available at:
-
-    http://localhost:7474
-
-`VagrantFiles` using this box can forward ports 50030, 50060, 50070, and
-50075 to the host machine for the Hadoop web monitoring interfaces.
-
-    config.vm.forward_port 50030, 50030
-    config.vm.forward_port 50060, 50060
-    config.vm.forward_port 50070, 50070
-    config.vm.forward_port 50075, 50075
-
-The HDFS web interface is available:
-
-    http://localhost:50070/
-
-The Job Tracker web interface is available:
-
-    http://localhost:50030/
-
-The Task Tracker web interface is available:
-
-    http://localhost:50060/
-
-
 Examples
 --------
 Example multi-VM stacks are included under `examples`. At present, these
@@ -486,8 +405,6 @@ include some standalone single VM:
 * `mysql_standalone`: A standalone MySQL instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
   the Hadoop services.
-* `aws_elastic_mapreduce_standalone`: A standalone AWS Elastic MapReduce
-  example.
 * `nginx_extras_standalone`: A standalone instance of the
   `nginx_extras_precise64` VM with ElasticSearch, MongoDB, Neo4J and Hadoop.
   Basically, all the toys.
