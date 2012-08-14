@@ -2,6 +2,7 @@ class boxgrinder {
 
   include guardian
   include boxgrinder-repository
+  include apt-cacher-ng
 
   exec {
     "boxgrinder libguestfs-tools":
@@ -20,9 +21,6 @@ class boxgrinder {
   }
 
   file {
-    "/etc/vmbuilder/firstscripts/apt.sh":
-      source => "puppet:///modules/boxgrinder/etc/vmbuilder/firstscripts/apt.sh";
-
     "/etc/vmbuilder.cfg":
       source => "puppet:///modules/boxgrinder/etc/vmbuilder.cfg";
   }
@@ -30,7 +28,8 @@ class boxgrinder {
   Class["guardian"] ->
     Class["boxgrinder-repository"] ->
     Exec["boxgrinder libguestfs-tools"] ->
-    Package["boxgrinder-build"] ->
-    File["/etc/vmbuilder/firstscripts/apt.sh"]
+    Package["boxgrinder-build"]
+
+  Class["guardian"] -> Class["apt-cacher-ng"]
 
 }
