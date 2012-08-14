@@ -20,6 +20,9 @@ class boxgrinder {
   }
 
   file {
+    "/etc/vmbuilder/firstscripts/apt.sh":
+      source => "puppet:///modules/boxgrinder/etc/vmbuilder/firstscripts/apt.sh";
+
     "/etc/vmbuilder.cfg":
       source => "puppet:///modules/boxgrinder/etc/vmbuilder.cfg";
   }
@@ -27,6 +30,7 @@ class boxgrinder {
   Class["guardian"] ->
     Class["boxgrinder-repository"] ->
     Exec["boxgrinder libguestfs-tools"] ->
-    Package["boxgrinder-build"]
+    Package["boxgrinder-build"] ->
+    File["/etc/vmbuilder/firstscripts/apt.sh"]
 
 }
