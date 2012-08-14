@@ -1,0 +1,8 @@
+name: ubuntu-precise
+os:
+  name: ubuntu
+  version: precise
+hardware:
+  partitions:
+    "/":
+      size: 1
