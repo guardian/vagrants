@@ -6,4 +6,7 @@ Vagrant::Config.run do |config|
   # config.vm.boot_mode = :gui
   config.ssh.forward_x11 = true
 
+  # Forward the apt-cacher html endpoint at http://localhost:9999/acng-report.html
+  config.vm.forward_port 9999, 9999
+
 end

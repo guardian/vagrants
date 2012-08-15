@@ -32,6 +32,15 @@ And ssh onto it:
 
     /opt/vagrant/bin/vagrant ssh
 
+The Apt cache web interface:
+
+    http://localhost:9999/acng-report.html
+
+The following is a simple Boxgrinder execution test:
+
+    $ export BOXGRINDER_DEBUG_VMBUILDER=1
+    $ boxgrinder-build --debug -l boxgrinder-ubuntu-plugin /vagrant/precise.appl
+
 
 
 Vagrant Commmands

@@ -1,0 +1,15 @@
+name: precise
+summary: Sample Ubuntu appliance
+os:
+  name: ubuntu
+  version: precise
+hardware:
+  partitions:
+    "/":
+      size: 1
+packages:
+  includes:
+    - git
+    - puppet
+    - ntp
+    - openjdk-6-jdk

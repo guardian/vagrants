@@ -411,6 +411,32 @@ To build the package from scratch, first build `base_precise64`, then:
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
+The Apt cache web interface:
+
+    http://localhost:9999/acng-report.html
+
+The following is a simple Boxgrinder execution test:
+
+    $ export BOXGRINDER_DEBUG_VMBUILDER=1
+    $ boxgrinder-build --debug -l boxgrinder-ubuntu-plugin precise.appl
+
+Where the `precise.appl` file consists of:
+
+    name: precise
+    summary: Sample Ubuntu appliance
+    os:
+      name: ubuntu
+      version: precise
+    hardware:
+      partitions:
+        "/":
+          size: 1
+    packages:
+      includes:
+        - git
+        - puppet
+        - ntp
+        - openjdk-6-jdk
 
 
 Examples
