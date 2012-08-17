@@ -20,16 +20,16 @@ class flume {
 
   exec {
     "flume-download":
-      command => "/usr/bin/wget http://mirror.ox.ac.uk/sites/rsync.apache.org/incubator/flume/flume-1.1.0-incubating/apache-flume-1.1.0-incubating-bin.tar.gz",
+      command => "/usr/bin/wget http://mirror.ox.ac.uk/sites/rsync.apache.org/flume/1.2.0/apache-flume-1.2.0-bin.tar.gz",
       cwd => "/var/cache/downloads",
-      creates => "/var/cache/downloads/apache-flume-1.1.0-incubating-bin.tar.gz",
+      creates => "/var/cache/downloads/apache-flume-1.2.0-bin.tar.gz",
       timeout => 0;
   }
 
   exec {
     flume-extract:
       cwd => "/usr/share",
-      command => "/bin/tar xzf /var/cache/downloads/apache-flume-1.1.0-incubating-bin.tar.gz && mv apache-flume-1.1.0-incubating-bin flume-ng",
+      command => "/bin/tar xzf /var/cache/downloads/apache-flume-1.2.0-bin.tar.gz && mv apache-flume-1.2.0 flume-ng",
       creates => "/usr/share/flume-ng";
   }
 
