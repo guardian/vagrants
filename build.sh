@@ -5,6 +5,7 @@ BOXES="$BOXES nginx_precise64 apache2_precise64"
 BOXES="$BOXES mongodb_precise64 elasticsearch_precise64 neo4j_precise64 mysql_precise64"
 BOXES="$BOXES nginx_extras_precise64"
 BOXES="$BOXES zookeeper_precise64 hadoop_precise64"
+BOXES="$BOXES sage_precise64"
 BOXES="$BOXES boxgrinder_precise64"
 
 VAGRANT=/opt/vagrant/bin/vagrant
