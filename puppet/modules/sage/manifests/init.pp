@@ -61,8 +61,8 @@ class sage {
   }
 
   File['/root/sage.setup'] -> Exec['setup-sage']
+  Package['build-essential'] -> Exec['setup-sage']
 
-  Package['build-essential'] -> Service[sage]
   Package['libfontconfig1'] -> Service[sage]
   Package['texlive'] -> Service[sage]
   Package['dvipng'] -> Service[sage]
