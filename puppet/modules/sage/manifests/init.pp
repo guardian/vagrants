@@ -22,6 +22,8 @@ class sage {
 
   package {
     [
+      'build-essential',
+      'libcairo2-dev',
       'libfontconfig1',
       'texlive',
       'dvipng',
@@ -60,6 +62,7 @@ class sage {
 
   File['/root/sage.setup'] -> Exec['setup-sage']
 
+  Package['build-essential'] -> Service[sage]
   Package['libfontconfig1'] -> Service[sage]
   Package['texlive'] -> Service[sage]
   Package['dvipng'] -> Service[sage]
