@@ -1,0 +1,20 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "centos5"
+  # TODO: Somebody promised me they would build one of these that we can trust.
+  config.vm.box_url = "http://dl.dropbox.com/u/9227672/centos-5.6-x86_64-netinstall-4.1.6.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+  config.vm.share_folder "puppet-files", "/etc/puppet/files", "."
+
+  config.vm.forward_port 1521, 1521
+
+  config.vm.customize [ "modifyvm", :id, "--name", "OracleXE" ,"--memory", "2048"]
+
+  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/fileserver.conf", "--debug"] do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "site.pp"
+  end
+
+end

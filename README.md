@@ -10,16 +10,16 @@ virtualisation.
 
 Install the Open Source Edition of VirtualBox:
 
-    wget http://download.virtualbox.org/virtualbox/4.1.18/virtualbox-4.1_4.1.18-78361~Ubuntu~natty_amd64.deb
-    sudo dpkg -i virtualbox-4.1_4.1.18-78361~Ubuntu~natty_amd64.deb
+    wget http://download.virtualbox.org/virtualbox/4.2.6/virtualbox-4.2_4.2.6-82870~Ubuntu~quantal_amd64.deb
+    sudo dpkg -i virtualbox-4.2_4.2.6-82870~Ubuntu~quantal_amd64.deb
 
 If you are using a different version of Ubuntu, substitute the appropriate deb
 from the [VirtualBox download page][virtualbox-download].
 
 Then install Vagrant itself:
 
-    wget http://files.vagrantup.com/packages/eb590aa3d936ac71cbf9c64cf207f148ddfc000a/vagrant_1.0.3_x86_64.deb
-    sudo dpkg -i vagrant_1.0.3_x86_64.deb
+    wget http://files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/vagrant_x86_64.deb
+    sudo dpkg -i vagrant_x86_64.deb
 
 
 Preliminaries: IntelliJ Project Files

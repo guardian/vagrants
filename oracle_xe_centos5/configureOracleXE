@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Automate interaction with Oracle XE configuration script
+/usr/bin/expect -c "
+  set timeout 600
+  spawn /etc/init.d/oracle-xe configure
+  expect -re \"Specify the HTTP port that will be used for Oracle Application Express.*:\" { send \"\r\" };
+  expect -re \"Specify a port that will be used for the database listener.*:\" { send \"\r\" };
+  expect -re \"Specify a password to be used for database accounts.*:\" { send \"oracle\r\" };
+  expect -re \"Confirm the password:\" { send \"oracle\r\" };
+  expect -re \"Do you want Oracle Database 11g Express Edition to be started on boot.*:\" { send \"\r\" };
+  expect -re \"Configuring database...\";
+  expect -re \"Installation completed successfully.\";
+  expect eof
+"
+
+touch /root/configuredOracleXE

@@ -1,0 +1,11 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "oracle_xe_centos5"
+  config.vm.box_url = "../../output/oracle_xe_centos5.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+
+  config.vm.forward_port 1521, 1521
+
+end

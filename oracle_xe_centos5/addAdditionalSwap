@@ -1,0 +1,11 @@
+#!/bin/bash
+
+dd if=/dev/zero of=/swap bs=1024 count=1048576
+mkswap /swap
+swapon /swap
+swapon -a
+
+cat >> /etc/fstab <<EOF
+/swap                       swap        swap    defaults        0 0
+EOF
+
