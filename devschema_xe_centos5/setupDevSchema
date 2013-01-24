@@ -1,0 +1,16 @@
+#! /bin/bash
+
+# wait for the db to get up
+sleep 60
+
+if [ ! -f "/root/configuredDevSchema" ]
+then
+	# Setting up the developer schema
+	echo "Creating delivery_beta account."
+	. /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+	cd /vagrant
+	sqlplus sys/oracle as sysdba @setup.sql
+
+	echo "delivery_beta account created"
+	touch /root/configuredDevSchema
+fi

@@ -1,0 +1,14 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "oracle_xe_centos5"
+  # TODO: Somebody promised me they would build one of these that we can trust.
+  config.vm.box_url = "../output/oracle_xe_centos5.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+  config.vm.forward_port 1521, 1521
+
+  config.vm.customize [ "modifyvm", :id, "--name", "OracleXE" ,"--memory", "2048"]
+
+  config.vm.provision :shell, :path => "setupDevSchema"
+end
