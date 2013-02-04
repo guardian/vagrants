@@ -1,0 +1,45 @@
+{
+  "description": "NTP Module for Debian, Ubuntu, CentOS, RHEL, OEL, Fedora & FreeBSD",
+  "summary": "NTP Module",
+  "types": [
+
+  ],
+  "author": "Puppet Labs",
+  "source": "git://github.com/puppetlabs/puppetlabs-ntp",
+  "project_page": "http://github.com/puppetlabs/puppetlabs-ntp",
+  "name": "puppetlabs-ntp",
+  "checksums": {
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/fixtures/manifests/site.pp": "d41d8cd98f00b204e9800998ecf8427e",
+    "README.markdown": "5b4545edbc330fd7f6bb39749e00805c",
+    "templates/ntp.conf.debian.erb": "050df366e51d8e0d592871f7c1d64c94",
+    "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+    "manifests/init.pp": "92997581d541a4ba44b19c6ca8c2fe66",
+    "LICENSE": "2a944942e1496af1886903d274dedb13",
+    "files/README.markdown": "3d44458cc68d8513b51e3b56c604eec4",
+    "templates/ntp.conf.freebsd.erb": "e0ba259811925c114a3398044b735d07",
+    "spec/README.markdown": "32a1fc0121c28aff554ef5d422b8b51e",
+    "templates/README.markdown": "aada0a1952329e46b98695349dba6203",
+    "Rakefile": "f37e6131fe7de9a49b09d31596f5fbf1",
+    "tests/init.pp": "d398e7687ec1d893ef23d1b7d2afc094",
+    "Modulefile": "c8e0ee4edd9df01dc9ada533e3c43495",
+    "lib/puppet/parser/functions/README.markdown": "e596ce938864a80fd1e51640cca7f612",
+    "manifests/README.markdown": "b9970454391883e36b55137328792a55",
+    "lib/puppet/type/README.markdown": "34b8c80ba8683afca99f2d28ca7e70b2",
+    "lib/puppet/provider/README.markdown": "3835801d7626dd8d541c4fdf7ca9f3e4",
+    "CHANGELOG": "7cd76ce1a5385b76e7e495c08c25bc60",
+    "lib/puppet/facter/README.markdown": "145e26334b4d80e48e9e55ba78800579",
+    "spec/unit/puppet/type/README.markdown": "de26a7643813abd6c2e7e28071b1ef94",
+    "spec/classes/ntp_spec.rb": "1e0e0422ff33f099a17075152b303304",
+    "templates/ntp.conf.el.erb": "e49e0f38aef8ea3cc9869aed8fc72c94",
+    "spec/unit/puppet/provider/README.markdown": "e52668944ee6af2fb5d5b9e798342645"
+  },
+  "dependencies": [
+    {
+      "version_requirement": ">= 0.1.6",
+      "name": "puppetlabs/stdlib"
+    }
+  ],
+  "license": "Apache Version 2.0",
+  "version": "0.2.0"
+}

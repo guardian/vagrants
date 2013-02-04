@@ -1,4 +1,5 @@
 .vagrant
+.tmp
 .idea
 *.iml
 *.box
