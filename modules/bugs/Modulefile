@@ -1,0 +1,8 @@
+name    'bugs'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/bugs'
+author 'guardian'
+license 'Apache'
+summary 'Manage an installation of OpenBUGS and JAGS'
+description 'Manage an OpenBUGS and JAGS installation'
+project_page 'https://github.com/guardian/vagrants/modules/bugs'

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sudo -u hdfs hadoop fs -mkdir -p /user/vagrant
+sudo -u hdfs hadoop fs -chown vagrant:vagrant /user/vagrant
+
+sudo -u hdfs hadoop fs -mkdir -p /tmp
+sudo -u hdfs hadoop fs -chmod -R 1777 /tmp
+
+sudo -u hdfs hadoop fs -mkdir -p /var/log/hadoop-yarn
+sudo -u hdfs hadoop fs -chown yarn:mapred /var/log/hadoop-yarn
+
+sudo -u hdfs hadoop fs -mkdir -p /user/history
+sudo -u hdfs hadoop fs -chown mapred:mapred /user/history
+sudo -u hdfs hadoop fs -chmod 770 /user/history
+
+sudo -u hdfs hadoop fs -mkdir -p /tmp/hadoop-yarn/staging
+sudo -u hdfs hadoop fs -chmod -R 1777 /tmp/hadoop-yarn/staging
+
+sudo -u hdfs hadoop fs -mkdir -p /tmp/hadoop-yarn/staging/history/done_intermediate
+sudo -u hdfs hadoop fs -chmod -R 1777 /tmp/hadoop-yarn/staging/history/done_intermediate
+sudo -u hdfs hadoop fs -chown -R mapred:mapred /tmp/hadoop-yarn/staging
+
+touch /root/hdfs.done

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Start Sage to fixup paths.
+/opt/sage/sage -c "1+1"
+
+# Fix R paths: https://groups.google.com/forum/?fromgroups=#!topic/sage-support/HSHgjD6ujTM
+sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|/opt/sage|g' \
+  /opt/sage/local/lib/R/bin/R \
+  /opt/sage/local/lib/R/bin/libtool \
+  /opt/sage/local/lib/R/etc/Makeconf \
+  /opt/sage/local/lib/R/etc/ldpaths \
+  /opt/sage/local/lib/R/etc/Renviron \
+  /opt/sage/local/bin/R
+
+# Make sure we have Hmisc for typesetting R
+/opt/sage/sage -c "r.install_packages('Hmisc')"
+
+# Install some common packages
+/opt/sage/sage -c "r.install_packages('ggplot2')"
+/opt/sage/sage -c "r.install_packages('Cairo')"
+/opt/sage/sage -c "r.install_packages('plyr')"
+/opt/sage/sage -c "r.install_packages('rjson')"
+
+# Packages for Bayesian analysis
+/opt/sage/sage -c "r.install_packages('coda')"
+/opt/sage/sage -c "r.install_packages('boa')"
+/opt/sage/sage -c "r.install_packages('rjags')"
+/opt/sage/sage -c "r.install_packages('R2OpenBUGS')"
+/opt/sage/sage -c "r.install_packages('MCMCpack')"
+
+# Hack to get notebook initial admin password set
+/usr/bin/expect -c "
+  spawn /opt/sage/sage -c \"notebook(automatic_login=False,port=1234)\"
+  expect {
+    \"Enter new password:\"     {
+      send \"password\r\"
+      expect \"Retype new password:\" { send \"password\r\" };
+      expect -re \".*QuietSite starting on 1234\" { send \003 };
+      expect -re \".*Server Shut Down.\"
+    }
+    timeout
+  }
+"
+
+touch /root/sage.done

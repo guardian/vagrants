@@ -1,0 +1,8 @@
+name    'vowpalwabbit'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/vowpalwabbit'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Vowpal Wabbit installation'
+description 'Manage an Vowpal Wabbit installation'
+project_page 'https://github.com/guardian/vagrants/modules/vowpalwabbit'

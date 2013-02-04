@@ -1,0 +1,8 @@
+name    'guardian'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/apache2'
+author 'guardian'
+license 'Apache'
+summary 'Manage an Apache installation'
+description 'Manage an Apache installation'
+project_page 'https://github.com/guardian/vagrants/modules/apache2'

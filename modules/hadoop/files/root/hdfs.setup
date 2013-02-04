@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+# Create the HDFS filesystem
+/bin/echo "Y" | /usr/bin/hadoop --config /etc/hadoop namenode -format
+
+# Set permissions for hdfs user on the hosting filesystem
+chown -R hdfs:hdfs /hadoop
+
+# We need to start the namenode and datanode to perform some modifications to HDFS
+/etc/init.d/hadoop/namenode start
+/etc/init.d/hadoop/datanode start
+
+# We are all friends on HDFS
+/usr/bin/hadoop --config /etc/hadoop fs -chmod 777 /
+
+# Setup HDFS structure for Hive
+/usr/bin/hadoop --config /etc/hadoop fs -test -e /tmp || /usr/bin/hadoop --config /etc/hadoop fs -mkdir /tmp
+/usr/bin/hadoop --config /etc/hadoop fs -test -e /user/hive/warehouse || /usr/bin/hadoop --config /etc/hadoop fs -mkdir /user/hive/warehouse
+/usr/bin/hadoop --config /etc/hadoop fs -chmod a+w /tmp /user/hive/warehouse
+
+
+touch /root/hdfs.done

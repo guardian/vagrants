@@ -1,0 +1,10 @@
+name    'hadoop2'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/hadoop2'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Hadoop 2 installation'
+description 'Manage a Hadoop 2 installation'
+project_page 'https://github.com/guardian/vagrants/modules/hadoop2'
+
+dependency 'guardian/java', '>= 0.1'

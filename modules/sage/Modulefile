@@ -1,0 +1,8 @@
+name    'sage'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/sage'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Sage Math installation'
+description 'Manage a Sage Math installation'
+project_page 'https://github.com/guardian/vagrants/modules/sage'

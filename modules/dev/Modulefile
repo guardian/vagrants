@@ -1,0 +1,8 @@
+name    'java'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/dev'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Vagrants development installation'
+description 'Manage a Vagrants development installation'
+project_page 'https://github.com/guardian/vagrants/modules/dev'

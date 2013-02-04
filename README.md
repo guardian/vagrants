@@ -1,106 +1,37 @@
 Vagrant Development Boxes
 =========================
 
-Preliminaries: Install Vagrant(Ubuntu)
---------------------------------------
+Vagrant VM boxes for Guardian projects.
+
+
+Preliminaries: VirtualBox and Vagrant
+-------------------------------------
 [Vagrant][vagrant] is a tool to "create and configure lightweight, reproducible,
 and portable development environments." Vagrant itself is a virtual instance
 creation and startup tool on top of Oracle VirtualBox which takes care of the
 virtualisation.
 
-Install the Open Source Edition of VirtualBox:
+Download and install the Open Source Edition of VirtualBox from [virtualbox].
 
-    wget http://download.virtualbox.org/virtualbox/4.2.6/virtualbox-4.2_4.2.6-82870~Ubuntu~quantal_amd64.deb
-    sudo dpkg -i virtualbox-4.2_4.2.6-82870~Ubuntu~quantal_amd64.deb
-
-If you are using a different version of Ubuntu, substitute the appropriate deb
-from the [VirtualBox download page][virtualbox-download].
-
-Then install Vagrant itself:
-
-    wget http://files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/vagrant_x86_64.deb
-    sudo dpkg -i vagrant_x86_64.deb
-
-
-Preliminaries: IntelliJ Project Files
--------------------------------------
-Because this is not a builded project, there is no support for automatically
-creating IntelliJ project definitions. If you want to use the IntelliJ editors
-you will need to create a new project in IntelliJ. Use the Create project from
-existing sources, unmark the source files that IntelliJ finds and confirm
-project creation.
-
-In the new project, go to Project Structure and create a new module from scratch
-specifying the project base directory as the content root. Do not create a
-source directory and finish. In the newly constructed module, add the project
-base directory as a sources directory.
-
-Your project should now be setup for editing.
-
-
-`base_precise64`
---------------
-Basic Ubuntu 12.04 box with `/etc/gu`, apt configuration and Java.
-
-    /opt/vagrant/bin/vagrant init base_precise64 http://path-to-base_precise64.box
-    /opt/vagrant/bin/vagrant up
-
-And ssh onto it:
-
-    /opt/vagrant/bin/vagrant ssh
-
-To build the package from scratch:
-
-    cd base_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/base_precise64.box
-
-The puppet provisioning during the `vagrant up` step may take some time.
-
-
-`nginx_precise64`
---------------
-The basic Ubuntu box with an NGINX installation.
-
-    /opt/vagrant/bin/vagrant init nginx_precise64 http://path-to-nginx_precise64.box
-    /opt/vagrant/bin/vagrant up
-
-And ssh onto it:
-
-    /opt/vagrant/bin/vagrant ssh
-
-To build the package from scratch:
-
-    cd nginx_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/nginx_precise64.box
-
-The puppet provisioning during the `vagrant up` step may take some time.
-
-`VagrantFiles` using this box should forward port 80 to the host machine.
-
-    config.vm.forward_port 80, 8000
-
-This forwards port 80 to port 8000 on the host machine to avoid clashes with
-existing webservers on the host box.
+Then download and install Vagrant from [vagrant]. The Linux packages install
+the `vagrant` executable at `/opt/vagrant/bin` and you will need to add this to
+your path.
 
 
 `apache2_precise64`
 --------------
 The basic Ubuntu box with an Apache 2 installation.
 
-    /opt/vagrant/bin/vagrant init nginx_precise64 http://path-to-apache2_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init nginx_precise64 http://path-to-apache2_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
 To build the package from scratch:
 
-    cd nginx_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/nginx_precise64.box
+    rake output/apache2_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -112,52 +43,45 @@ This forwards port 80 to port 8000 on the host machine to avoid clashes with
 existing webservers on the host box.
 
 
-`mongodb_precise64`
----------------------
-The basic Ubuntu box with a MongoDB installation.
+`nginx_precise64`
+--------------
+The basic Ubuntu box with an NGINX installation.
 
-    /opt/vagrant/bin/vagrant init mongodb_precise64 http://path-to-mongodb_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init nginx_precise64 http://path-to-nginx_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
-To build the package from scratch, first build `base_precise64`, then:
+To build the package from scratch:
 
-    cd mongodb_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/mongodb_precise64.box
+    rake output/nginx_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
-`VagrantFiles` using this box should forward ports 27017 and 28017 to the host
-machine for MongoDB.
+`VagrantFiles` using this box should forward port 80 to the host machine.
 
-    config.vm.forward_port 27017, 27017
-    config.vm.forward_port 28017, 28017
+    config.vm.forward_port 80, 8000
 
-The MongoDB web interface is available:
-
-    http://localhost:28017
+This forwards port 80 to port 8000 on the host machine to avoid clashes with
+existing webservers on the host box.
 
 
 `elasticsearch_precise64`
 ---------------------
 The basic Ubuntu box with an ElasticSearch installation.
 
-    /opt/vagrant/bin/vagrant init elasticsearch_precise64 http://path-to-elasticsearch_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init elasticsearch_precise64 http://path-to-elasticsearch_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
 To build the package from scratch, first build `base_precise64`, then:
 
-    cd elasticsearch_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/elasticsearch_precise64.box
+    rake output/elasticsearch_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -172,22 +96,70 @@ A number of ElasticSearch plugins are included in this box. See:
     http://localhost:9200/_plugin/bigdesk/
 
 
+`mongodb_precise64`
+---------------------
+The basic Ubuntu box with a MongoDB installation.
+
+    vagrant init mongodb_precise64 http://path-to-mongodb_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch:
+
+    rake output/mongodb_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward ports 27017 and 28017 to the host
+machine for MongoDB.
+
+    config.vm.forward_port 27017, 27017
+    config.vm.forward_port 28017, 28017
+
+The MongoDB web interface is available:
+
+    http://localhost:28017
+
+
+`mysql_precise64`
+---------------------
+The basic Ubuntu box with a MySQL installation.
+
+    vagrant init mysql_precise64 http://path-to-mysql_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/mysql_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 3306.
+
+    config.vm.forward_port 3306, 3306
+
+
 `neo4j_precise64`
 ---------------------
 The basic Ubuntu box with a Neo4J installation.
 
-    /opt/vagrant/bin/vagrant init neo4j_precise64 http://path-to-neo4j_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init neo4j_precise64 http://path-to-neo4j_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
 To build the package from scratch, first build `base_precise64`, then:
 
-    cd neo4j_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/neo4j_precise64.box
+    rake output/neo4j_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -200,68 +172,26 @@ The Neo4J interface is available at:
     http://localhost:7474
 
 
-`mysql_precise64`
+`postgres_precise64`
 ---------------------
-The basic Ubuntu box with a MySQL installation.
+The basic Ubuntu box with a PostgreSQL installation.
 
-    /opt/vagrant/bin/vagrant init mysql_precise64 http://path-to-mysql_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init postgres_precise64 http://path-to-postgres_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
 To build the package from scratch, first build `base_precise64`, then:
 
-    cd mysql_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/mysql_precise64.box
+    rake output/postgres_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
-`VagrantFiles` using this box should forward port 3306.
+`VagrantFiles` using this box should forward port 5432.
 
-    config.vm.forward_port 3306, 3306
-
-
-`zookeeper_precise64`
----------------------
-The basic Ubuntu box with a Zookeeper installation.
-
-    /opt/vagrant/bin/vagrant init zookeeper_precise64 http://path-to-zookeeper_precise64.box
-    /opt/vagrant/bin/vagrant up
-
-And ssh onto it:
-
-    /opt/vagrant/bin/vagrant ssh
-
-To build the package from scratch, first build `base_precise64`, then:
-
-    cd zookeeper_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/zookeeper_precise64.box
-
-The puppet provisioning during the `vagrant up` step may take some time.
-
-`VagrantFiles` using this box can forward port 2181 to potentially acccess the
-Zookeeper data from the host machine.
-
-    config.vm.forward_port 2181, 2181
-
-The `ZooInspector` tool can be used from the VMs with X forwarding to inspect
-the ZooKeeper configuration. Ensure X forwarding is enabled in the
-`Vagrantfile`:
-
-    config.ssh.forward_x11 = true
-
-On the host machine, add an `xhost` for the Vagrant VM:
-
-    xhost +10.0.0.2
-
-Then ssh to the VM and start `zooinspector`:
-
-    /opt/vagrant/bin/vagrant ssh
-    > zooinspector
+    config.vm.forward_port 5432, 5432
 
 
 `hadoop_precise64`
@@ -270,18 +200,16 @@ The basic Ubuntu box with a Hadoop setup. Note that clients must start the
 Hadoop services they require. Starting without client services allows this box
 to be used in various Hadoop configurations.
 
-    /opt/vagrant/bin/vagrant init hadoop_precise64 http://path-to-hadoop_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init hadoop_precise64 http://path-to-hadoop_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
 To build the package from scratch, first build `base_precise64`, then:
 
-    cd hadoop_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/hadoop_precise64.box
+    rake output/hadoop_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -387,27 +315,163 @@ execution test:
     > LOAD DATA LOCAL INPATH 'ml-100k/u.data' OVERWRITE INTO TABLE u_data;
     > SELECT COUNT(*) FROM u_data;
 
-This VM also comes with Apache Flume installed. It can be started manually with:
 
-    flume-ng node --conf /etc/flume-ng/ --conf-file /etc/flume-ng/flume.conf --name foo
+`hadoop2_precise64`
+---------------------
+The basic Ubuntu box with a Hadoop 2 setup.
+
+    vagrant init hadoop2_precise64 http://path-to-hadoop2_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/hadoop2_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box can forward ports 8042, 8088, 8888, 11000, 11001,
+19888, 50070 and 50075 to the host machine for the web monitoring interfaces.
+
+    config.vm.forward_port 8042, 8042
+    config.vm.forward_port 8088, 8088
+    config.vm.forward_port 8888, 8888
+    config.vm.forward_port 11000, 11000
+    config.vm.forward_port 11001, 11001
+    config.vm.forward_port 19888, 19888
+    config.vm.forward_port 50070, 50070
+    config.vm.forward_port 50075, 50075
+
+The HDFS web interface is available:
+
+    http://localhost:50070/
+
+The following is a simple Hadoop execution test:
+
+    $ hadoop fs -put /etc/hadoop input
+    $ hadoop jar /usr/share/hadoop/hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
+    $ hadoop fs -cat output/*
+
+This VM comes with Apache Pig installed. The following is a simple Pig execution
+test:
+
+    $ hadoop fs -put /etc/passwd passwd
+    $ pig
+    grunt> A = load 'passwd' using PigStorage(':');
+    grunt> B = foreach A generate $0 as id;
+    grunt> dump B;
+
+This VM also comes with Apache Hive installed. The following is a simple Hive
+execution test:
+
+    $ wget 'http://www.grouplens.org/system/files/ml-100k.zip'
+    $ unzip ml-100k.zip
+    $ hive
+    > CREATE TABLE u_data (userid INT, movieid INT, rating INT, unixtime STRING)
+      ROW FORMAT DELIMITED
+      FIELDS TERMINATED BY '\t'
+      STORED AS TEXTFILE;
+    > LOAD DATA LOCAL INPATH 'ml-100k/u.data' OVERWRITE INTO TABLE u_data;
+    > SELECT COUNT(*) FROM u_data;
+
+
+`zookeeper_precise64`
+---------------------
+The basic Ubuntu box with a Zookeeper installation.
+
+    vagrant init zookeeper_precise64 http://path-to-zookeeper_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/zookeeper_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box can forward port 2181 to potentially acccess the
+Zookeeper data from the host machine.
+
+    config.vm.forward_port 2181, 2181
+
+The `ZooInspector` tool can be used from the VMs with X forwarding to inspect
+the ZooKeeper configuration. Ensure X forwarding is enabled in the
+`Vagrantfile`:
+
+    config.ssh.forward_x11 = true
+
+On the host machine, add an `xhost` for the Vagrant VM:
+
+    xhost +10.0.0.2
+
+Then ssh to the VM and start `zooinspector`:
+
+    vagrant ssh
+    > zooinspector
+
+
+`vowpalwabbit_precise64`
+------------------------
+The basic Ubuntu box with a Vowpal Wabbit installation.
+
+    vagrant init vowpalwabbit_precise64 http://path-to-vowpalwabbit_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/vowpalwabbit_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+
+`sage_precise64`
+----------------
+The basic Ubuntu box with a Sage Math installation.
+
+    vagrant init sage_precise64 http://path-to-sage_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/sage_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+The Sage notebook web interface:
+
+    http://localhost:8080
+
+Login with user `admin` and password `password`.
 
 
 `boxgrinder_precise64`
 ---------------------
 The basic Ubuntu box with a Boxgrinder installation for building VMs.
 
-    /opt/vagrant/bin/vagrant init boxgrinder_precise64 http://path-to-boxgrinder_precise64.box
-    /opt/vagrant/bin/vagrant up
+    vagrant init boxgrinder_precise64 http://path-to-boxgrinder_precise64.box
+    vagrant up
 
 And ssh onto it:
 
-    /opt/vagrant/bin/vagrant ssh
+    vagrant ssh
 
 To build the package from scratch, first build `base_precise64`, then:
 
-    cd boxgrinder_precise64
-    /opt/vagrant/bin/vagrant up
-    /opt/vagrant/bin/vagrant package --output ../output/boxgrinder_precise64.box
+    rake ouput/boxgrinder_precise64.box
 
 The puppet provisioning during the `vagrant up` step may take some time.
 
@@ -439,6 +503,22 @@ Where the `precise.appl` file consists of:
         - openjdk-6-jdk
 
 
+`dev_precise64`
+---------------------
+The basic Ubuntu box with a support tools for developing vagrants.
+
+    vagrant init dev_precise64 http://path-to-dev_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake ouput/dev_precise64.box
+
+
 Examples
 --------
 Example multi-VM stacks are included under `examples`. At present, these
@@ -446,22 +526,23 @@ include some standalone single VM:
 
 * `elasticsearch_standalone`: A standalone ElasticSearch instance.
 * `mongodb_standalone`: A standalone MongoDB instance.
-* `neo4j_standalone`: A standalone Neo4J instance.
 * `mysql_standalone`: A standalone MySQL instance.
+* `neo4j_standalone`: A standalone Neo4J instance.
+* `postgres_standalone`: A standalone PostgreSQL instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
   the Hadoop services.
-* `nginx_extras_standalone`: A standalone instance of the
-  `nginx_extras_precise64` VM with ElasticSearch, MongoDB, Neo4J and Hadoop.
-  Basically, all the toys.
+* `hadoop2_standalone`: A standalone Hadoop 2 instance.
 * `zookeeper_standalone`: A standalone Zookeeper instance.
+* `sage_standalone`: A standalone Sage instance.
+* `vowpalwabbit_standalone`: A standalone Vowpal Wabbit instance.
 * `boxgrinder_standalone`: A standalone Boxgrinder instance.
 
 Some example webserver configurations:
 
-* `nginx_play_standalone`: A standalone NGINX instance demonstrating a proxy
-   configuration suitable for a Play application server on the same box.
 * `apache2_play_standalone`: A standalone Apache 2 instance demonstrating a
    proxy configuration suitable for a Play application server on the same box.
+* `nginx_play_standalone`: A standalone NGINX instance demonstrating a proxy
+   configuration suitable for a Play application server on the same box.
 
 Some example stacks:
 
@@ -480,21 +561,18 @@ And some more complicated clusers:
 
 Vagrant Commmands
 -----------------
-
-* `/opt/vagrant/bin/vagrant suspend`: Disable the virtual instance. The
-  allocated disc space for the instance is retained but the instance will not be
-  available. The running state at suspend time is saved for resumption.
-* `/opt/vagrant/bin/vagrant resume`: Wake up a previously suspended virtual
+* `vagrant suspend`: Disable the virtual instance. The allocated disc space for
+  the instance is retained but the instance will not be available. The running
+  state at suspend time is saved for resumption.
+* `vagrant resume`: Wake up a previously suspended virtual instance.
+* `vagrant halt`: Turn off the virtual instance. Calling `vagrant up` after this
+  is the equivalent of a reboot.
+* `vagrant up --no-provision`: Bring up the virtual instance without doing the
+  provisioning step. Useful if the provisioning step is destructive.
+* `vagrant destroy`: Hose your virtual instance, reclaiming the allocated disc
+  space.
+* `vagrant provision`: Rerun puppet or chef provisioning on the virtual
   instance.
-* `/opt/vagrant/bin/vagrant halt`: Turn off the virtual instance. Calling
-  `vagrant up` after this is the equivalent of a reboot.
-* `/opt/vagrant/bin/vagrant up --no-provision`: Bring up the virtual instance
-  without doing the provisioning step. Useful if the provisioning step is
-  destructive.
-* `/opt/vagrant/bin/vagrant destroy`: Hose your virtual instance, reclaiming the
-  allocated disc space.
-* `/opt/vagrant/bin/vagrant provision`: Rerun puppet or chef provisioning on the
-  virtual instance.
 
 
 Vagrant SSH X Forwarding
@@ -518,7 +596,7 @@ Vagrant Troubleshooting
 To see more verbose output on any vagrant command, add a VAGRANT_LOG environment
 variable setting, e.g.:
 
-    VAGRANT_LOG=INFO /opt/vagrant/bin/vagrant up
+    VAGRANT_LOG=INFO vagrant up
 
 Further help troubleshooting can be obtained by editing your `Vagrantfile` and
 enabling the `config.vm.boot_mode = :gui` setting. This will pop up a VirtualBox

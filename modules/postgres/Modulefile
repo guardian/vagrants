@@ -1,0 +1,8 @@
+name    'guardian'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/postgres'
+author 'guardian'
+license 'Apache'
+summary 'Manage a PostgreSQL installation'
+description 'Manage a PostgreSQL installation'
+project_page 'https://github.com/guardian/vagrants/modules/postgres'
