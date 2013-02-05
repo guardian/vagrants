@@ -31,7 +31,6 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|
 /opt/sage/sage -c "r.install_packages('R2OpenBUGS')"
 /opt/sage/sage -c "r.install_packages('rbugs')"
 # BRugs won't compile for configuration issues
-#
 #/opt/sage/sage -c "r.install_packages('BRugs')"
 /opt/sage/sage -c "r.install_packages('rjags')"
 /opt/sage/sage -c "r.install_packages('R2jags')"

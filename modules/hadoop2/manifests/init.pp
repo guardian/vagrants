@@ -28,7 +28,7 @@ class hadoop2 {
     [
       'bigtop-utils',
       'hadoop-conf-pseudo',
-      'oozie',
+#      'oozie',
       'hue',
       'hive',
       'pig',
@@ -43,14 +43,14 @@ class hadoop2 {
       command => '/etc/init.d/hadoop-hdfs-namenode init',
       creates => '/var/lib/hadoop-hdfs/cache/hdfs/dfs/data';
 
-    'download-extjs':
-      cwd     => '/usr/lib/oozie/libext',
-      command => '/usr/bin/wget http://extjs.com/deploy/ext-2.2.zip',
-      creates => '/usr/lib/oozie/libext/ext-2.2.zip';
+#    'download-extjs':
+#      cwd     => '/usr/lib/oozie/libext',
+#      command => '/usr/bin/wget http://extjs.com/deploy/ext-2.2.zip',
+#      creates => '/usr/lib/oozie/libext/ext-2.2.zip';
 
-    'setup-oozie':
-      command => '/etc/init.d/oozie init && touch /root/oozie.done',
-      creates => '/root/oozie.done';
+#    'setup-oozie':
+#      command => '/etc/init.d/oozie init && touch /root/oozie.done',
+#      creates => '/root/oozie.done';
 
     'setup-hdfs':
       cwd     => '/root',
@@ -65,7 +65,7 @@ class hadoop2 {
       'hadoop-yarn-resourcemanager',
       'hadoop-yarn-nodemanager',
       'hadoop-mapreduce-historyserver',
-      'oozie',
+#      'oozie',
       'hue',
       'zookeeper-server'
     ]:
@@ -84,11 +84,11 @@ class hadoop2 {
     Service['hadoop-yarn-nodemanager'] ->
     Service['hadoop-mapreduce-historyserver']
 
-  Service['hadoop-mapreduce-historyserver'] ->
-    Package['oozie'] ->
-    Exec['download-extjs'] ->
-    Exec['setup-oozie'] ->
-    Service['oozie']
+#  Service['hadoop-mapreduce-historyserver'] ->
+#    Package['oozie'] ->
+#    Exec['download-extjs'] ->
+#    Exec['setup-oozie'] ->
+#    Service['oozie']
 
   Service['hadoop-mapreduce-historyserver'] ->
     Package['hue'] ->
