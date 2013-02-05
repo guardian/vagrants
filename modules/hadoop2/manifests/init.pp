@@ -1,14 +1,13 @@
-# Hadoop BigTop Infinite Intern
+# Manage a Hadoop BigTop installation
 class hadoop2 {
 
   require java
 
-  $repo = 'http://bigtop.s3.amazonaws.com/releases/0.4.0'
+  $repo = 'http://bigtop.s3.amazonaws.com/releases/0.5.0'
   $arch = 'ubuntu/precise/x86_64'
 
   apt::source {
     'bigtop':
-      # TODO: bigtop-0.5.0 not present on S3?
       location    => "${repo}/${arch}",
       release     => 'bigtop',
       repos       => 'contrib',
@@ -20,13 +19,6 @@ class hadoop2 {
   file {
     '/root/hdfs.setup':
       source => 'puppet:///modules/hadoop2/root/hdfs.setup',
-      owner  => root,
-      group  => root,
-      mode   => '0744';
-
-    # TODO: Remove, fixed in bigtop-0.5.0
-    '/etc/hue/conf/hue.ini':
-      source => 'puppet:///modules/hadoop2/etc/hue/conf/hue.ini',
       owner  => root,
       group  => root,
       mode   => '0744';
@@ -100,7 +92,6 @@ class hadoop2 {
 
   Service['hadoop-mapreduce-historyserver'] ->
     Package['hue'] ->
-    File['/etc/hue/conf/hue.ini'] ->
     Service['hue']
 
   Service['hadoop-mapreduce-historyserver'] -> Package['giraph']
