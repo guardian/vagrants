@@ -20,13 +20,28 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|
 /opt/sage/sage -c "r.install_packages('Cairo')"
 /opt/sage/sage -c "r.install_packages('plyr')"
 /opt/sage/sage -c "r.install_packages('rjson')"
+/opt/sage/sage -c "r.install_packages('markdown')"
+# knitr needs newer R. Coming in Sage 5.7
+#/opt/sage/sage -c "r.install_packages('knitr')"
+
 
 # Packages for Bayesian analysis
 /opt/sage/sage -c "r.install_packages('coda')"
 /opt/sage/sage -c "r.install_packages('boa')"
-/opt/sage/sage -c "r.install_packages('rjags')"
 /opt/sage/sage -c "r.install_packages('R2OpenBUGS')"
+/opt/sage/sage -c "r.install_packages('rbugs')"
+# BRugs won't compile for configuration issues
+#
+#/opt/sage/sage -c "r.install_packages('BRugs')"
+/opt/sage/sage -c "r.install_packages('rjags')"
+/opt/sage/sage -c "r.install_packages('R2jags')"
+/opt/sage/sage -c "r.install_packages('runjags')"
 /opt/sage/sage -c "r.install_packages('MCMCpack')"
+
+# Update packages
+/opt/sage/sage -R --vanilla <<EOF
+update.packages(repos = "http://cran.r-project.org", ask = FALSE)
+EOF
 
 # Hack to get notebook initial admin password set
 /usr/bin/expect -c "
