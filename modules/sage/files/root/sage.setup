@@ -12,6 +12,9 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|
   /opt/sage/local/lib/R/etc/Renviron \
   /opt/sage/local/bin/R
 
+# Optimise C++ compilation a little harder
+sed -i 's/CXXFLAGS =.*/CXXFLAGS = -O2/' /opt/sage/local/lib/R/etc/Makeconf
+
 # Make sure we have Hmisc for typesetting R
 /opt/sage/sage -c "r.install_packages('Hmisc')"
 
@@ -21,7 +24,7 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|
 /opt/sage/sage -c "r.install_packages('plyr')"
 /opt/sage/sage -c "r.install_packages('rjson')"
 /opt/sage/sage -c "r.install_packages('markdown')"
-# knitr needs newer R. Coming in Sage 5.7
+# knitr needs newer R. Coming in Sage 5.7.
 #/opt/sage/sage -c "r.install_packages('knitr')"
 
 
@@ -36,11 +39,23 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|
 /opt/sage/sage -c "r.install_packages('R2jags')"
 /opt/sage/sage -c "r.install_packages('runjags')"
 /opt/sage/sage -c "r.install_packages('MCMCpack')"
+/opt/sage/sage -c "r.install_packages('inline')"
+# Rcpp needs newer R. Coming in Sage 5.7.
+#/opt/sage/sage -c "r.install_packages('Rcpp')"
+#/opt/sage/sage -R --vanilla <<EOF
+#install.packages(
+#  'rstan',
+#   type = 'source',
+#   repos = c(getOption("repos"), rstan = "http://wiki.stan.googlecode.com/git/R")
+#)
+#EOF
+
 
 # Update packages
 /opt/sage/sage -R --vanilla <<EOF
 update.packages(repos = "http://cran.r-project.org", ask = FALSE)
 EOF
+
 
 # Hack to get notebook initial admin password set
 /usr/bin/expect -c "
