@@ -103,6 +103,11 @@ Vagrant::Config.run do |config|
   # Data Analysis
   ##############################################################################
 
+  config.vm.define :r_precise64 do |r|
+    r.vm.host_name = "rstudio"
+    r.vm.customize [ "modifyvm", :id, "--name", "r" ]
+  end
+
   config.vm.define :sage_precise64 do |sage|
     sage.vm.host_name = "sage"
     sage.vm.customize [ "modifyvm", :id, "--name", "sage_precise64" ]

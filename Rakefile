@@ -9,7 +9,7 @@ boxes = [
   'apache2_precise64', 'nginx_precise64',
   'elasticsearch_precise64', 'mongodb_precise64', 'mysql_precise64', 'neo4j_precise64', 'postgres_precise64',
   'hadoop_precise64',  'hadoop2_precise64', 'zookeeper_precise64',
-  'sage_precise64', 'vowpalwabbit_precise64',
+  'r_precise64', 'sage_precise64', 'vowpalwabbit_precise64',
   'boxgrinder_precise64', 'dev_precise64'
 ]
 

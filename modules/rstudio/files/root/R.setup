@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Install packages
+R --vanilla <<EOF
+
+options(repos = c('http://cran.ma.imperial.ac.uk'))
+
+# Update existing packages
+update.packages(ask = FALSE)
+
+# Some common packages
+install.packages('plyr')
+install.packages('reshape2')
+install.packages('rjson')
+install.packages('lubridate')
+install.packages('Hmisc')
+install.packages('data.table')
+
+# Literate programming packages
+install.packages('markdown')
+install.packages('knitr')
+
+# Graphics packages
+install.packages('Cairo')
+install.packages('ggplot2')
+install.packages('scales')
+install.packages('GGally')
+
+# Packages for Bayesian analysis
+install.packages('coda')
+install.packages('boa')
+install.packages('R2OpenBUGS')
+install.packages('rbugs')
+#install.packages('BRugs')
+install.packages('rjags')
+install.packages('R2jags')
+install.packages('runjags')
+install.packages('MCMCpack')
+
+EOF
+
+
+[ $? -eq 0 ] && touch /root/R.done
