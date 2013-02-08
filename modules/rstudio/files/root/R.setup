@@ -25,6 +25,7 @@ install.packages('Cairo')
 install.packages('ggplot2')
 install.packages('scales')
 install.packages('GGally')
+install.packages('gridExtra')
 
 # Packages for Bayesian analysis
 install.packages('coda')
