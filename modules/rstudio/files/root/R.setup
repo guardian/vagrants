@@ -27,6 +27,13 @@ install.packages('scales')
 install.packages('GGally')
 install.packages('gridExtra')
 
+# Packages for regression analysis
+install.packages('car')
+install.packages('lmtest')
+install.packages('arm')
+install.packages('gvlma')
+install.packages('penalized')
+
 # Packages for Bayesian analysis
 install.packages('coda')
 install.packages('boa')
