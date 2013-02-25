@@ -8,13 +8,14 @@ options(repos = c('http://cran.ma.imperial.ac.uk'))
 # Update existing packages
 update.packages(ask = FALSE)
 
-# Some common packages
+# Data manipulation
 install.packages('plyr')
 install.packages('reshape2')
 install.packages('rjson')
 install.packages('lubridate')
 install.packages('Hmisc')
 install.packages('data.table')
+install.packages('sqldf')
 
 # Literate programming packages
 install.packages('markdown')
@@ -28,6 +29,7 @@ install.packages('GGally')
 install.packages('gridExtra')
 
 # Packages for regression analysis
+install.packages('biglm')
 install.packages('car')
 install.packages('lmtest')
 install.packages('arm')
