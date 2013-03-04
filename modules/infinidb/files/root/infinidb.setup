@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+# Complete the InfiniDB installation.
+/usr/local/Calpont/bin/install-infinidb.sh
+
+# Relax connection permissions.
+service infinidb start
+/usr/local/Calpont/mysql/bin/mysql \
+  --defaults-file=/usr/local/Calpont/mysql/my.cnf \
+  -u root \
+  -e "grant all privileges on *.* to 'root'@'%';"
+service infinidb stop
+
+touch /root/infinidb.done

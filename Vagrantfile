@@ -53,6 +53,12 @@ Vagrant::Config.run do |config|
     mysql.vm.forward_port 3306, 3306
   end
 
+  config.vm.define :infinidb_precise64 do |infinidb|
+    infinidb.vm.host_name = "infinidb"
+    infinidb.vm.customize [ "modifyvm", :id, "--name", "infinidb_precise64", "--memory", "2048" ]
+    infinidb.vm.forward_port 3306, 3306
+  end
+
   config.vm.define :neo4j_precise64 do |neo4j|
     neo4j.vm.host_name = "neo4j"
     neo4j.vm.customize [ "modifyvm", :id, "--name", "neo4j_precise64" ]
@@ -117,6 +123,13 @@ Vagrant::Config.run do |config|
   config.vm.define :vowpalwabbit_precise64 do |vowpalwabbit|
     vowpalwabbit.vm.host_name = "vowpalwabbit"
     vowpalwabbit.vm.customize [ "modifyvm", :id, "--name", "vowpalwabbit_precise64" ]
+  end
+
+  config.vm.define :saiku_precise64 do |saiku|
+    saiku.vm.host_name = "saiku"
+    saiku.vm.customize [ "modifyvm", :id, "--name", "saiku_precise64", "--memory", "2048" ]
+    saiku.vm.forward_port 3306, 3306
+    saiku.vm.forward_port 8080, 8080
   end
 
 

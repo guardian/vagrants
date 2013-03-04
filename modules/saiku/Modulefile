@@ -1,0 +1,11 @@
+name    'saiku'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/saiku'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Saiku installation'
+description 'Manage a Mondrian installation'
+project_page 'https://github.com/guardian/vagrants/modules/saiku'
+
+dependency 'guardian/tomcat', '>= 0.1'
+dependency 'guardian/infinidb', '>= 0.1'

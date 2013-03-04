@@ -1,0 +1,8 @@
+name    'tomcat7'
+version '0.1'
+source 'git://github.com/guardian/vagrants/modules/tomcat7'
+author 'guardian'
+license 'Apache'
+summary 'Manage a Tomcat7 installation'
+description 'Manage a Tomcat7 installation'
+project_page 'https://github.com/guardian/vagrants/modules/tomcat7'
