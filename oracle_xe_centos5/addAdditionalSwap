@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 dd if=/dev/zero of=/swap bs=1024 count=1048576
 mkswap /swap

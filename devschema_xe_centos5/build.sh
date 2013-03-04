@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 BOX=devschema_xe_centos5
 VAGRANT=/opt/vagrant/bin/vagrant
