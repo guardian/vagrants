@@ -146,6 +146,28 @@ The puppet provisioning during the `vagrant up` step may take some time.
     config.vm.forward_port 3306, 3306
 
 
+`infinidb_precise64`
+---------------------
+The basic Ubuntu box with an InfiniDB installation.
+
+    vagrant init infinidb_precise64 http://path-to-infinidb_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/infinidb_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 3306.
+
+    config.vm.forward_port 3306, 3306
+
+
 `neo4j_precise64`
 ---------------------
 The basic Ubuntu box with a Neo4J installation.
@@ -458,6 +480,29 @@ The Sage notebook web interface:
 Login with user `admin` and password `password`.
 
 
+`saiku_precise64`
+---------------------
+The basic Ubuntu box with a Saiku on top of InfiniDB installation.
+
+    vagrant init saiku_precise64 http://path-to-saiku_precise64.box
+    vagrant up
+
+And ssh onto it:
+
+    vagrant ssh
+
+To build the package from scratch, first build `base_precise64`, then:
+
+    rake output/saiku_precise64.box
+
+The puppet provisioning during the `vagrant up` step may take some time.
+
+`VagrantFiles` using this box should forward port 3306 and port 8080.
+
+    config.vm.forward_port 3306, 3306
+    config.vm.forward_port 8080, 8080
+
+
 `boxgrinder_precise64`
 ---------------------
 The basic Ubuntu box with a Boxgrinder installation for building VMs.
@@ -527,6 +572,7 @@ include some standalone single VM:
 * `elasticsearch_standalone`: A standalone ElasticSearch instance.
 * `mongodb_standalone`: A standalone MongoDB instance.
 * `mysql_standalone`: A standalone MySQL instance.
+* `infinidb_standalone`: A standalone InfiniDB instance.
 * `neo4j_standalone`: A standalone Neo4J instance.
 * `postgres_standalone`: A standalone PostgreSQL instance.
 * `hadoop_standalone`: A standalone Hadoop instance demonstrating how to start
@@ -535,6 +581,7 @@ include some standalone single VM:
 * `zookeeper_standalone`: A standalone Zookeeper instance.
 * `sage_standalone`: A standalone Sage instance.
 * `vowpalwabbit_standalone`: A standalone Vowpal Wabbit instance.
+* `saiku_standalone`: A standalone Saiku instance.
 * `boxgrinder_standalone`: A standalone Boxgrinder instance.
 
 Some example webserver configurations:
